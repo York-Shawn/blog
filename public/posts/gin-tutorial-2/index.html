@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">Gin-Tutorial-2 - Ayaの🎸Room</title><meta name="Description" content="About LoveIt Theme"><meta property="og:title" content="Gin-Tutorial-2" />
+<meta property="og:description" content="In this chapter, we gonna make basic module and public module. These module seldom associate with core business, their task is to connect different parts of app, and make app a closed loop." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/gin-tutorial-2/" /><meta property="og:image" content="http://example.org/posts/gin-tutorial-2/featured-image.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-03-11T03:01:30+08:00" />
+<meta property="article:modified_time" content="2021-03-12T03:01:30+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/posts/gin-tutorial-2/featured-image.jpg"/>
+<meta name="twitter:title" content="Gin-Tutorial-2"/>
+<meta name="twitter:description" content="In this chapter, we gonna make basic module and public module. These module seldom associate with core business, their task is to connect different parts of app, and make app a closed loop."/>
+<meta name="application-name" content="AyaのGuitar Room">
+<meta name="apple-mobile-web-app-title" content="AyaのGuitar Room">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/gin-tutorial-2/" /><link rel="prev" href="http://example.org/posts/gin-tutorial-1/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Gin-Tutorial-2",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/gin-tutorial-2\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/example.org\/posts\/gin-tutorial-2\/featured-image.jpg",
+                            "width":  800 ,
+                            "height":  320 
+                        }],"genre": "posts","keywords": "Go, Backend","wordcount":  1966 ,
+        "url": "http:\/\/example.org\/posts\/gin-tutorial-2\/","datePublished": "2021-03-11T03:01:30+08:00","dateModified": "2021-03-12T03:01:30+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Aya"},"author": {
+                "@type": "Person",
+                "name": "Aya"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fix" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Ayaの🎸Room"><span class="header-title-pre"><i class="fas fa-code"></i></span><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/York-Shawn" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Ayaの🎸Room"><span class="header-title-pre"><i class="fas fa-code"></i></span><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" onclick="return false;" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/York-Shawn" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Gin-Tutorial-2</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Aya</a></span>&nbsp;<span class="post-category">categories <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-03-11">2021-03-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1966 words
+                <i class="far fa-clock fa-fw"></i>&nbsp;10 minutes&nbsp;<span id="/posts/gin-tutorial-2/" class="leancloud_visitors" data-flag-title="Gin-Tutorial-2">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
+                    </span>&nbsp;
+					<a href="#comments" id="post-meta-vcount" title="View Comments">
+						<i class="fas fa-comment fa-fw"></i>&nbsp;<span id="/posts/gin-tutorial-2/" class="waline-comment-count"></span>&nbsp;条评论
+					</a></div>
+
+        </div><div class="featured-image"><img
+        class="lazyload"
+        data-src="/posts/gin-tutorial-2/featured-image.jpg"
+        data-srcset="/posts/gin-tutorial-2/featured-image.jpg, /posts/gin-tutorial-2/featured-image.jpg 1.5x, /posts/gin-tutorial-2/featured-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/gin-tutorial-2/featured-image.jpg"
+        title="/posts/gin-tutorial-2/featured-image.jpg"
+    /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#standerlized-errorcode">Standerlized ErrorCode</a>
+      <ul>
+        <li><a href="#common-errcode">common errcode</a></li>
+        <li><a href="#error-handler">error handler</a>
+          <ul>
+            <li><a href="#errcodego">errcode.go</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#configuration-management">Configuration Management</a>
+      <ul>
+        <li><a href="#configuration-file">configuration file</a>
+          <ul>
+            <li><a href="#configsyaml">configs.yaml</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#component">component</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#settinggo">setting.go</a></li>
+            <li><a href="#sectiongo">section.go</a></li>
+          </ul>
+        </li>
+        <li><a href="#package-gloabl-variable">package gloabl variable</a>
+          <ul>
+            <li><a href="#settinggo-1">setting.go</a></li>
+          </ul>
+        </li>
+        <li><a href="#initialize-reading-conf">initialize reading conf</a></li>
+        <li><a href="#maingo">main.go</a></li>
+        <li><a href="#modify-server-conf">modify server conf</a></li>
+      </ul>
+    </li>
+    <li><a href="#database-connection">DataBase Connection</a>
+      <ul>
+        <li><a href="#component-1">component</a>
+          <ul>
+            <li><a href="#modelgo">model.go</a></li>
+          </ul>
+        </li>
+        <li><a href="#package-global-variable">package global variable</a>
+          <ul>
+            <li><a href="#dbgo">db.go</a></li>
+          </ul>
+        </li>
+        <li><a href="#initialization">initialization</a></li>
+        <li><a href="#maingo-1">main.go</a></li>
+      </ul>
+    </li>
+    <li><a href="#log">Log</a>
+      <ul>
+        <li><a href="#log-classification">log classification</a>
+          <ul>
+            <li><a href="#loggergo">logger.go</a></li>
+          </ul>
+        </li>
+        <li><a href="#log-standardization">log standardization</a></li>
+        <li><a href="#loggergo-1">logger.go</a></li>
+        <li><a href="#log-formatting--output">log formatting &amp; output</a></li>
+        <li><a href="#loggergo-2">logger.go</a></li>
+        <li><a href="#log-classified-output">log classified output</a></li>
+        <li><a href="#loggergo-3">logger.go</a></li>
+        <li><a href="#package-global-variable-1">package global variable</a>
+          <ul>
+            <li><a href="#settinggo-2">setting.go</a></li>
+          </ul>
+        </li>
+        <li><a href="#initialization-1">initialization</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>In this chapter, we gonna make basic module and public module. These module seldom associate with core business, their task is to connect different parts of app, and make app a closed loop.</p>
+<h2 id="standerlized-errorcode">Standerlized ErrorCode</h2>
+<h3 id="common-errcode">common errcode</h3>
+<p>predefine common errcode in <code>pkg/errcode</code> to guide users</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">var</span> <span class="p">(</span>
+	<span class="nx">Success</span>                   <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#34;成功&#34;</span><span class="p">)</span>
+	<span class="nx">ServerError</span>               <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">10000000</span><span class="p">,</span> <span class="s">&#34;服务内部错误&#34;</span><span class="p">)</span>
+	<span class="nx">InvalidParams</span>             <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">10000001</span><span class="p">,</span> <span class="s">&#34;入参错误&#34;</span><span class="p">)</span>
+	<span class="nx">NotFound</span>                  <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">10000002</span><span class="p">,</span> <span class="s">&#34;找不到&#34;</span><span class="p">)</span>
+	<span class="nx">UnauthorizedAuthNotExist</span>  <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">10000003</span><span class="p">,</span> <span class="s">&#34;鉴权失败，找不到对应的 AppKey 和 AppSecret&#34;</span><span class="p">)</span>
+	<span class="nx">UnauthorizedTokenError</span>    <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">10000004</span><span class="p">,</span> <span class="s">&#34;鉴权失败，Token 错误&#34;</span><span class="p">)</span>
+	<span class="nx">UnauthorizedTokenTimeout</span>  <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">10000005</span><span class="p">,</span> <span class="s">&#34;鉴权失败，Token 超时&#34;</span><span class="p">)</span>
+	<span class="nx">UnauthorizedTokenGenerate</span> <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">10000006</span><span class="p">,</span> <span class="s">&#34;鉴权失败，Token 生成失败&#34;</span><span class="p">)</span>
+	<span class="nx">TooManyRequests</span>           <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">10000007</span><span class="p">,</span> <span class="s">&#34;请求过多&#34;</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="error-handler">error handler</h3>
+<p>create errcode.go in <code>pkg/errcode</code>, write some public methods od error handling to standerlized our error output.</p>
+<h4 id="errcodego">errcode.go</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">type</span> <span class="nx">Error</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">code</span> <span class="kt">int</span> <span class="s">`json:&#34;code&#34;`</span>
+	<span class="nx">msg</span> <span class="kt">string</span> <span class="s">`json:&#34;msg&#34;`</span>
+	<span class="nx">details</span> <span class="p">[]</span><span class="kt">string</span> <span class="s">`json:&#34;details&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">codes</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">string</span><span class="p">{}</span>
+
+<span class="kd">func</span> <span class="nf">NewError</span><span class="p">(</span><span class="nx">code</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">msg</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">Error</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">codes</span><span class="p">[</span><span class="nx">code</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+		<span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;错误码 %d 已经存在，请更换一个&#34;</span><span class="p">,</span> <span class="nx">code</span><span class="p">))</span>
+	<span class="p">}</span>
+	<span class="nx">codes</span><span class="p">[</span><span class="nx">code</span><span class="p">]</span> <span class="p">=</span> <span class="nx">msg</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">Error</span><span class="p">{</span><span class="nx">code</span><span class="p">:</span> <span class="nx">code</span><span class="p">,</span> <span class="nx">msg</span><span class="p">:</span> <span class="nx">msg</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Error</span><span class="p">)</span> <span class="nf">Error</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;错误码：%d, 错误信息:：%s&#34;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nf">Code</span><span class="p">(),</span> <span class="nx">e</span><span class="p">.</span><span class="nf">Msg</span><span class="p">())</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Error</span><span class="p">)</span> <span class="nf">Code</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">e</span><span class="p">.</span><span class="nx">code</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Error</span><span class="p">)</span> <span class="nf">Msg</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">e</span><span class="p">.</span><span class="nx">msg</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Error</span><span class="p">)</span> <span class="nf">Msgf</span><span class="p">(</span><span class="nx">args</span> <span class="p">[]</span><span class="kd">interface</span><span class="p">{})</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">args</span><span class="o">...</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Error</span><span class="p">)</span> <span class="nf">Details</span><span class="p">()</span> <span class="p">[]</span><span class="kt">string</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">e</span><span class="p">.</span><span class="nx">details</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Error</span><span class="p">)</span> <span class="nf">WithDetails</span><span class="p">(</span><span class="nx">details</span> <span class="o">...</span><span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">Error</span> <span class="p">{</span>
+	<span class="nx">newError</span> <span class="o">:=</span> <span class="o">*</span><span class="nx">e</span>
+	<span class="nx">newError</span><span class="p">.</span><span class="nx">details</span> <span class="p">=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{}</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">d</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">details</span> <span class="p">{</span>
+		<span class="nx">newError</span><span class="p">.</span><span class="nx">details</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">newError</span><span class="p">.</span><span class="nx">details</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">newError</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Error</span><span class="p">)</span> <span class="nf">StatusCode</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="k">switch</span> <span class="nx">e</span><span class="p">.</span><span class="nf">Code</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">Success</span><span class="p">.</span><span class="nf">Code</span><span class="p">():</span>
+		<span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span>
+	<span class="k">case</span> <span class="nx">ServerError</span><span class="p">.</span><span class="nf">Code</span><span class="p">():</span>
+		<span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span>
+	<span class="k">case</span> <span class="nx">InvalidParams</span><span class="p">.</span><span class="nf">Code</span><span class="p">():</span>
+		<span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span>
+	<span class="k">case</span> <span class="nx">UnauthorizedAuthNotExist</span><span class="p">.</span><span class="nf">Code</span><span class="p">():</span>
+		<span class="k">fallthrough</span>
+	<span class="k">case</span> <span class="nx">UnauthorizedTokenError</span><span class="p">.</span><span class="nf">Code</span><span class="p">():</span>
+		<span class="k">fallthrough</span>
+	<span class="k">case</span> <span class="nx">UnauthorizedTokenGenerate</span><span class="p">.</span><span class="nf">Code</span><span class="p">():</span>
+		<span class="k">fallthrough</span>
+	<span class="k">case</span> <span class="nx">UnauthorizedTokenTimeout</span><span class="p">.</span><span class="nf">Code</span><span class="p">():</span>
+		<span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span>
+	<span class="k">case</span> <span class="nx">TooManyRequests</span><span class="p">.</span><span class="nf">Code</span><span class="p">():</span>
+		<span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusTooManyRequests</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>in the <code>common_code.go</code> we use <strong>NewError</strong> method to create Error structure as the response towards error. <code>codes</code> is the carrier of global errcode.</p>
+<p><strong>StatusCod</strong> method is used for StatusCode transformation of specific errcode, given a Error and match its Code to common error and return the matched one.</p>
+<h2 id="configuration-management">Configuration Management</h2>
+<p>use third party lib <code>viper</code> to manage conf</p>
+<pre><code>go get -u github.com/spf13/viper
+</code></pre>
+<h3 id="configuration-file">configuration file</h3>
+<p>create config.yaml in <code>configs</code></p>
+<h4 id="configsyaml">configs.yaml</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">Server</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">RunMode</span><span class="p">:</span><span class="w"> </span><span class="l">debug</span><span class="w">
+</span><span class="w">  </span><span class="nt">HttpPort</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
+</span><span class="w">  </span><span class="nt">ReadTimeout</span><span class="p">:</span><span class="w"> </span><span class="m">60</span><span class="w">
+</span><span class="w">  </span><span class="nt">WriteTimeout</span><span class="p">:</span><span class="w"> </span><span class="m">60</span><span class="w">
+</span><span class="w"></span><span class="nt">App</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">DefaultPageSize</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span><span class="w">  </span><span class="nt">MaxPageSize</span><span class="p">:</span><span class="w"> </span><span class="m">100</span><span class="w">
+</span><span class="w">  </span><span class="nt">LogSavePath</span><span class="p">:</span><span class="w"> </span><span class="l">storage/logs</span><span class="w">
+</span><span class="w">  </span><span class="nt">LogFileName</span><span class="p">:</span><span class="w"> </span><span class="l">app</span><span class="w">
+</span><span class="w">  </span><span class="nt">LogFileExt</span><span class="p">:</span><span class="w"> </span><span class="l">.log</span><span class="w">
+</span><span class="w"></span><span class="nt">Database</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">DBType</span><span class="p">:</span><span class="w"> </span><span class="l">mysql</span><span class="w">
+</span><span class="w">  </span><span class="nt">Username</span><span class="p">:</span><span class="w"> </span><span class="l">root </span><span class="w"> </span><span class="c"># your own db username</span><span class="w">
+</span><span class="w">  </span><span class="nt">Password</span><span class="p">:</span><span class="w"> </span><span class="l">rootroot </span><span class="w"> </span><span class="c"># your own db passwd</span><span class="w">
+</span><span class="w">  </span><span class="nt">Host</span><span class="p">:</span><span class="w"> </span><span class="m">127.0.0.1</span><span class="p">:</span><span class="m">3306</span><span class="w">
+</span><span class="w">  </span><span class="nt">DBName</span><span class="p">:</span><span class="w"> </span><span class="l">blog_service</span><span class="w">
+</span><span class="w">  </span><span class="nt">TablePrefix</span><span class="p">:</span><span class="w"> </span><span class="l">blog_</span><span class="w">
+</span><span class="w">  </span><span class="nt">Charset</span><span class="p">:</span><span class="w"> </span><span class="l">utf8</span><span class="w">
+</span><span class="w">  </span><span class="nt">ParseTime</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
+</span><span class="w">  </span><span class="nt">MaxIdleConns</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span><span class="w">  </span><span class="nt">MaxOpenConns</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>in the configuration, we set the default settings for:</p>
+<ul>
+<li>Server: server conf, gin&rsquo;s RunMode, default HTTP listening port, maximum read and write time</li>
+<li>APP: Application conf, default page size, maximum page size and default log save path</li>
+<li>Database: Database conf, required parameters of connecting to db instance</li>
+</ul>
+<h2 id="component">component</h2>
+<p>after configuration file, encapsulate the method of reading conf. create setting.go in <code>pkg/setting</code></p>
+<h4 id="settinggo">setting.go</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">type</span> <span class="nx">Setting</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">vp</span> <span class="o">*</span><span class="nx">viper</span><span class="p">.</span><span class="nx">Viper</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">NewSetting</span><span class="p">()</span> <span class="p">(</span><span class="o">*</span><span class="nx">Setting</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">vp</span> <span class="o">:=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="nx">vp</span><span class="p">.</span><span class="nf">SetConfigName</span><span class="p">(</span><span class="s">&#34;config&#34;</span><span class="p">)</span>
+	<span class="nx">vp</span><span class="p">.</span><span class="nf">AddConfigPath</span><span class="p">(</span><span class="s">&#34;configs/&#34;</span><span class="p">)</span>
+	<span class="nx">vp</span><span class="p">.</span><span class="nf">SetConfigType</span><span class="p">(</span><span class="s">&#34;yaml&#34;</span><span class="p">)</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">vp</span><span class="p">.</span><span class="nf">ReadInConfig</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">Setting</span><span class="p">{</span><span class="nx">vp</span><span class="p">},</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>NewSetting</code> to initialize basic attribute of project&rsquo;s configuration.Set config file name as <code>config</code>, type as <code>yaml</code>, and config file path as <code>configs/</code></p>
+<p>Next we gonna create section.go in the same dir to declare the module of conf attribute and write methods to read setting in sections.</p>
+<h4 id="sectiongo">section.go</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">type</span> <span class="nx">ServerSettingS</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">RunMode</span>      <span class="kt">string</span>
+	<span class="nx">HttpPort</span>     <span class="kt">string</span>
+	<span class="nx">ReadTimeout</span>  <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+	<span class="nx">WriteTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">AppSettingS</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">DefaultPageSize</span> <span class="kt">int</span>
+	<span class="nx">MaxPageSize</span>     <span class="kt">int</span>
+	<span class="nx">LogSavePath</span>     <span class="kt">string</span>
+	<span class="nx">LogFileName</span>     <span class="kt">string</span>
+	<span class="nx">LogFileExt</span>      <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">DatabaseSettingS</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">DBType</span>       <span class="kt">string</span>
+	<span class="nx">UserName</span>     <span class="kt">string</span>
+	<span class="nx">Password</span>     <span class="kt">string</span>
+	<span class="nx">Host</span>         <span class="kt">string</span>
+	<span class="nx">DBName</span>       <span class="kt">string</span>
+	<span class="nx">TablePrefix</span>  <span class="kt">string</span>
+	<span class="nx">Charset</span>      <span class="kt">string</span>
+	<span class="nx">ParseTime</span>    <span class="kt">bool</span>
+	<span class="nx">MaxIdleConns</span> <span class="kt">int</span>
+	<span class="nx">MaxOpenConns</span> <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">Setting</span><span class="p">)</span> <span class="nf">ReadSection</span><span class="p">(</span><span class="nx">k</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">v</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">vp</span><span class="p">.</span><span class="nf">UnmarshalKey</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="package-gloabl-variable">package gloabl variable</h3>
+<p>To connect the conf and app, we should create global variable for us to use them.<br>
+setting.go in <code>global/</code></p>
+<h4 id="settinggo-1">setting.go</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">var</span> <span class="p">(</span>
+	<span class="nx">ServerSetting</span>   <span class="o">*</span><span class="nx">setting</span><span class="p">.</span><span class="nx">ServerSettingS</span>
+	<span class="nx">AppSetting</span>      <span class="o">*</span><span class="nx">setting</span><span class="p">.</span><span class="nx">AppSettingS</span>
+	<span class="nx">DatabaseSetting</span> <span class="o">*</span><span class="nx">setting</span><span class="p">.</span><span class="nx">DatabaseSettingS</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="initialize-reading-conf">initialize reading conf</h3>
+<p>back to main.go</p>
+<h3 id="maingo">main.go</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nf">setupSetting</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;init.setupSetting err: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">setupSetting</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">setting</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">setting</span><span class="p">.</span><span class="nf">NewSetting</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">setting</span><span class="p">.</span><span class="nf">ReadSection</span><span class="p">(</span><span class="s">&#34;Server&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">global</span><span class="p">.</span><span class="nx">ServerSetting</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">setting</span><span class="p">.</span><span class="nf">ReadSection</span><span class="p">(</span><span class="s">&#34;App&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">global</span><span class="p">.</span><span class="nx">AppSetting</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">setting</span><span class="p">.</span><span class="nf">ReadSection</span><span class="p">(</span><span class="s">&#34;Database&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">global</span><span class="p">.</span><span class="nx">DatabaseSetting</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+
+	<span class="nx">global</span><span class="p">.</span><span class="nx">ServerSetting</span><span class="p">.</span><span class="nx">ReadTimeout</span> <span class="o">*=</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
+	<span class="nx">global</span><span class="p">.</span><span class="nx">ServerSetting</span><span class="p">.</span><span class="nx">WriteTimeout</span> <span class="o">*=</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>init</code> is used for initialize process in app, and is run automatically.<br>
+Order is : init global variable =&gt; init method =&gt; main method</p>
+<h3 id="modify-server-conf">modify server conf</h3>
+<p>all we need to do is to set the conf and RunMode of gin in <code>main.go</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">gin</span><span class="p">.</span><span class="nf">SetMode</span><span class="p">(</span><span class="nx">global</span><span class="p">.</span><span class="nx">ServerSetting</span><span class="p">.</span><span class="nx">RunMode</span><span class="p">)</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">routers</span><span class="p">.</span><span class="nf">NewRouter</span><span class="p">()</span>
+	<span class="nx">s</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Server</span><span class="p">{</span>
+		<span class="nx">Addr</span><span class="p">:</span>           <span class="s">&#34;:&#34;</span> <span class="o">+</span> <span class="nx">global</span><span class="p">.</span><span class="nx">ServerSetting</span><span class="p">.</span><span class="nx">HttpPort</span><span class="p">,</span>
+		<span class="nx">Handler</span><span class="p">:</span>        <span class="nx">router</span><span class="p">,</span>
+		<span class="nx">ReadTimeout</span><span class="p">:</span>    <span class="nx">global</span><span class="p">.</span><span class="nx">ServerSetting</span><span class="p">.</span><span class="nx">ReadTimeout</span><span class="p">,</span>
+		<span class="nx">WriteTimeout</span><span class="p">:</span>   <span class="nx">global</span><span class="p">.</span><span class="nx">ServerSetting</span><span class="p">.</span><span class="nx">WriteTimeout</span><span class="p">,</span>
+		<span class="nx">MaxHeaderBytes</span><span class="p">:</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">s</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="database-connection">DataBase Connection</h2>
+<p>use third party lib <strong>gorm</strong></p>
+<pre><code>go get -u github.com/jinzhu/gorm
+</code></pre>
+<h3 id="component-1">component</h3>
+<p>add <strong>NewDBEngine</strong> method to <em>model.go</em> under <code>internal/model/</code></p>
+<h4 id="modelgo">model.go</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">type</span> <span class="nx">Model</span> <span class="kd">struct</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">NewDBEngine</span><span class="p">(</span><span class="nx">databaseSetting</span> <span class="o">*</span><span class="nx">setting</span><span class="p">.</span><span class="nx">DatabaseSettingS</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">db</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">gorm</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">databaseSetting</span><span class="p">.</span><span class="nx">DBType</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s:%s@tcp(%s)/%s?charset=%s&amp;parseTime=%t&amp;loc=Local&#34;</span><span class="p">,</span>
+		<span class="nx">databaseSetting</span><span class="p">.</span><span class="nx">UserName</span><span class="p">,</span>
+		<span class="nx">databaseSetting</span><span class="p">.</span><span class="nx">Password</span><span class="p">,</span>
+		<span class="nx">databaseSetting</span><span class="p">.</span><span class="nx">Host</span><span class="p">,</span>
+		<span class="nx">databaseSetting</span><span class="p">.</span><span class="nx">DBName</span><span class="p">,</span>
+		<span class="nx">databaseSetting</span><span class="p">.</span><span class="nx">Charset</span><span class="p">,</span>
+		<span class="nx">databaseSetting</span><span class="p">.</span><span class="nx">ParseTime</span><span class="p">,</span>
+	<span class="p">))</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+	<span class="p">}</span>
+	
+	<span class="k">if</span> <span class="nx">global</span><span class="p">.</span><span class="nx">ServerSetting</span><span class="p">.</span><span class="nx">RunMode</span> <span class="o">==</span> <span class="s">&#34;debug&#34;</span> <span class="p">{</span>
+		<span class="nx">db</span><span class="p">.</span><span class="nf">LogMode</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">db</span><span class="p">.</span><span class="nf">SingularTable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+	<span class="nx">db</span><span class="p">.</span><span class="nf">DB</span><span class="p">().</span><span class="nf">SetMaxIdleConns</span><span class="p">(</span><span class="nx">databaseSetting</span><span class="p">.</span><span class="nx">MaxIdleConns</span><span class="p">)</span>
+	<span class="nx">db</span><span class="p">.</span><span class="nf">DB</span><span class="p">().</span><span class="nf">SetMaxOpenConns</span><span class="p">(</span><span class="nx">databaseSetting</span><span class="p">.</span><span class="nx">MaxOpenConns</span><span class="p">)</span>
+
+	<span class="k">return</span> <span class="nx">db</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>NewDBEngine</strong> create a DB instance, and add the import of <code>gorm</code> and initialize MySQL driver lib <code>github.com/jinzhu/gorm/dialects/mysql</code></p>
+<h3 id="package-global-variable">package global variable</h3>
+<p>create db.go in <code>global</code></p>
+<h4 id="dbgo">db.go</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">var</span> <span class="p">(</span>
+    <span class="nx">DBEngine</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="initialization">initialization</h3>
+<p>add method <strong>setupDBEngine</strong> to main.go</p>
+<h3 id="maingo-1">main.go</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+	<span class="o">...</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nf">setupDBEngine</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;init.setupDBEngine err: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+<span class="kd">func</span> <span class="nf">setupSetting</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+<span class="kd">func</span> <span class="nf">setupLogger</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">setupDBEngine</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">err</span> <span class="kt">error</span>
+	<span class="nx">global</span><span class="p">.</span><span class="nx">DBEngine</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">model</span><span class="p">.</span><span class="nf">NewDBEngine</span><span class="p">(</span><span class="nx">global</span><span class="p">.</span><span class="nx">DatabaseSetting</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="log">Log</h2>
+<pre><code>go get -u gopkg.in/natefinch/lumberjack.v2
+</code></pre>
+<h3 id="log-classification">log classification</h3>
+<p>create logger.go in <code>pkg/logger/</code></p>
+<h4 id="loggergo">logger.go</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">type</span> <span class="nx">Level</span> <span class="kt">int8</span>
+
+<span class="kd">type</span> <span class="nx">Fields</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}</span>
+
+<span class="kd">const</span> <span class="p">(</span>
+	<span class="nx">LevelDebug</span> <span class="nx">Level</span> <span class="p">=</span> <span class="kc">iota</span>
+	<span class="nx">LevelInfo</span>
+	<span class="nx">LevelWarn</span>
+	<span class="nx">LevelError</span>
+	<span class="nx">LevelFatal</span>
+	<span class="nx">LevelPanic</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="nx">Level</span><span class="p">)</span> <span class="nf">String</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="k">switch</span> <span class="nx">l</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">LevelDebug</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">&#34;debug&#34;</span>
+	<span class="k">case</span> <span class="nx">LevelInfo</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">&#34;info&#34;</span>
+	<span class="k">case</span> <span class="nx">LevelWarn</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">&#34;warn&#34;</span>
+	<span class="k">case</span> <span class="nx">LevelError</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">&#34;error&#34;</span>
+	<span class="k">case</span> <span class="nx">LevelFatal</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">&#34;fatal&#34;</span>
+	<span class="k">case</span> <span class="nx">LevelPanic</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">&#34;panic&#34;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="s">&#34;&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We predefine the specific types of Level and Fields in app log, and categorize into Debug, Info, Warn, Error, Fatal, Panic.</p>
+<h3 id="log-standardization">log standardization</h3>
+<p>After categorize method, we shall work on methods for initialization of instance and standardized parameter binding</p>
+<h3 id="loggergo-1">logger.go</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">type</span> <span class="nx">Logger</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">newLogger</span> <span class="o">*</span><span class="nx">log</span><span class="p">.</span><span class="nx">Logger</span>
+	<span class="nx">ctx</span>       <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span>
+	<span class="nx">fields</span>    <span class="nx">Fields</span>
+	<span class="nx">callers</span>   <span class="p">[]</span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">NewLogger</span><span class="p">(</span><span class="nx">w</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span> <span class="nx">prefix</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">flag</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">Logger</span> <span class="p">{</span>
+	<span class="nx">l</span> <span class="o">:=</span> <span class="nx">log</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">flag</span><span class="p">)</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">Logger</span><span class="p">{</span><span class="nx">newLogger</span><span class="p">:</span> <span class="nx">l</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">clone</span><span class="p">()</span> <span class="o">*</span><span class="nx">Logger</span> <span class="p">{</span>
+	<span class="nx">nl</span> <span class="o">:=</span> <span class="o">*</span><span class="nx">l</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">nl</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">WithFields</span><span class="p">(</span><span class="nx">f</span> <span class="nx">Fields</span><span class="p">)</span> <span class="o">*</span><span class="nx">Logger</span> <span class="p">{</span>
+	<span class="nx">ll</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nf">clone</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">ll</span><span class="p">.</span><span class="nx">fields</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">ll</span><span class="p">.</span><span class="nx">fields</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="nx">Fields</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">for</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">f</span> <span class="p">{</span>
+		<span class="nx">ll</span><span class="p">.</span><span class="nx">fields</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="p">=</span> <span class="nx">v</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">ll</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">WithContext</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="o">*</span><span class="nx">Logger</span> <span class="p">{</span>
+	<span class="nx">ll</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nf">clone</span><span class="p">()</span>
+	<span class="nx">ll</span><span class="p">.</span><span class="nx">ctx</span> <span class="p">=</span> <span class="nx">ctx</span>
+	<span class="k">return</span> <span class="nx">ll</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">WithCaller</span><span class="p">(</span><span class="nx">skip</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">Logger</span> <span class="p">{</span>
+	<span class="nx">ll</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nf">clone</span><span class="p">()</span>
+	<span class="nx">pc</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="nx">line</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">runtime</span><span class="p">.</span><span class="nf">Caller</span><span class="p">(</span><span class="nx">skip</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">ok</span> <span class="p">{</span>
+		<span class="nx">f</span> <span class="o">:=</span> <span class="nx">runtime</span><span class="p">.</span><span class="nf">FuncForPC</span><span class="p">(</span><span class="nx">pc</span><span class="p">)</span>
+		<span class="nx">ll</span><span class="p">.</span><span class="nx">callers</span> <span class="p">=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s: %d %s&#34;</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="nx">line</span><span class="p">,</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Name</span><span class="p">())}</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">ll</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">WithCallersFrames</span><span class="p">()</span> <span class="o">*</span><span class="nx">Logger</span> <span class="p">{</span>
+	<span class="nx">maxCallerDepth</span> <span class="o">:=</span> <span class="mi">25</span>
+	<span class="nx">minCallerDepth</span> <span class="o">:=</span> <span class="mi">1</span>
+	<span class="nx">callers</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{}</span>
+	<span class="nx">pcs</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">uintptr</span><span class="p">,</span> <span class="nx">maxCallerDepth</span><span class="p">)</span>
+	<span class="nx">depth</span> <span class="o">:=</span> <span class="nx">runtime</span><span class="p">.</span><span class="nf">Callers</span><span class="p">(</span><span class="nx">minCallerDepth</span><span class="p">,</span> <span class="nx">pcs</span><span class="p">)</span>
+	<span class="nx">frames</span> <span class="o">:=</span> <span class="nx">runtime</span><span class="p">.</span><span class="nf">CallersFrames</span><span class="p">(</span><span class="nx">pcs</span><span class="p">[:</span><span class="nx">depth</span><span class="p">])</span>
+	<span class="k">for</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">more</span> <span class="o">:=</span> <span class="nx">frames</span><span class="p">.</span><span class="nf">Next</span><span class="p">();</span> <span class="nx">more</span><span class="p">;</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">more</span> <span class="p">=</span> <span class="nx">frames</span><span class="p">.</span><span class="nf">Next</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">callers</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">callers</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s: %d %s&#34;</span><span class="p">,</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">File</span><span class="p">,</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">Line</span><span class="p">,</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">Function</span><span class="p">))</span>
+		<span class="k">if</span> <span class="p">!</span><span class="nx">more</span> <span class="p">{</span>
+			<span class="k">break</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="nx">ll</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nf">clone</span><span class="p">()</span>
+	<span class="nx">ll</span><span class="p">.</span><span class="nx">callers</span> <span class="p">=</span> <span class="nx">callers</span>
+	<span class="k">return</span> <span class="nx">ll</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>WithLevel: Set log level<br>
+WithFields: Set log public fields
+WithContext: Set log context attribute
+WithCaller: Set one caller&rsquo;s information
+WithCallerFrames: Set all caller&rsquo;s information</p>
+<h3 id="log-formatting--output">log formatting &amp; output</h3>
+<h3 id="loggergo-2">logger.go</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">JSONFormat</span><span class="p">(</span><span class="nx">level</span> <span class="nx">Level</span><span class="p">,</span> <span class="nx">message</span> <span class="kt">string</span><span class="p">)</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}</span> <span class="p">{</span>
+	<span class="nx">data</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="nx">Fields</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">fields</span><span class="p">)</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span>
+	<span class="nx">data</span><span class="p">[</span><span class="s">&#34;level&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="nx">level</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span>
+	<span class="nx">data</span><span class="p">[</span><span class="s">&#34;time&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Local</span><span class="p">().</span><span class="nf">UnixNano</span><span class="p">()</span>
+	<span class="nx">data</span><span class="p">[</span><span class="s">&#34;message&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="nx">message</span>
+	<span class="nx">data</span><span class="p">[</span><span class="s">&#34;callers&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">callers</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">fields</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">l</span><span class="p">.</span><span class="nx">fields</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">k</span><span class="p">];</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+				<span class="nx">data</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="p">=</span> <span class="nx">v</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">data</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">Output</span><span class="p">(</span><span class="nx">level</span> <span class="nx">Level</span><span class="p">,</span> <span class="nx">message</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">body</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nf">JSONFormat</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span> <span class="nx">message</span><span class="p">))</span>
+	<span class="nx">content</span> <span class="o">:=</span> <span class="nb">string</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span>
+	<span class="k">switch</span> <span class="nx">level</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">LevelDebug</span><span class="p">:</span>
+		<span class="nx">l</span><span class="p">.</span><span class="nx">newLogger</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
+	<span class="k">case</span> <span class="nx">LevelInfo</span><span class="p">:</span>
+		<span class="nx">l</span><span class="p">.</span><span class="nx">newLogger</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
+	<span class="k">case</span> <span class="nx">LevelWarn</span><span class="p">:</span>
+		<span class="nx">l</span><span class="p">.</span><span class="nx">newLogger</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
+	<span class="k">case</span> <span class="nx">LevelError</span><span class="p">:</span>
+		<span class="nx">l</span><span class="p">.</span><span class="nx">newLogger</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
+	<span class="k">case</span> <span class="nx">LevelFatal</span><span class="p">:</span>
+		<span class="nx">l</span><span class="p">.</span><span class="nx">newLogger</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
+	<span class="k">case</span> <span class="nx">LevelPanic</span><span class="p">:</span>
+		<span class="nx">l</span><span class="p">.</span><span class="nx">newLogger</span><span class="p">.</span><span class="nf">Panic</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="log-classified-output">log classified output</h3>
+<h3 id="loggergo-3">logger.go</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">Info</span><span class="p">(</span><span class="nx">v</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+	<span class="nx">l</span><span class="p">.</span><span class="nf">Output</span><span class="p">(</span><span class="nx">LevelInfo</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprint</span><span class="p">(</span><span class="nx">v</span><span class="o">...</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">Infof</span><span class="p">(</span><span class="nx">format</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">v</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+	<span class="nx">l</span><span class="p">.</span><span class="nf">Output</span><span class="p">(</span><span class="nx">LevelInfo</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="nx">format</span><span class="p">,</span> <span class="nx">v</span><span class="o">...</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">Fatal</span><span class="p">(</span><span class="nx">v</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+	<span class="nx">l</span><span class="p">.</span><span class="nf">Output</span><span class="p">(</span><span class="nx">LevelFatal</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprint</span><span class="p">(</span><span class="nx">v</span><span class="o">...</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">Fatalf</span><span class="p">(</span><span class="nx">format</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">v</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+	<span class="nx">l</span><span class="p">.</span><span class="nf">Output</span><span class="p">(</span><span class="nx">LevelFatal</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="nx">format</span><span class="p">,</span> <span class="nx">v</span><span class="o">...</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>code above just shows <strong>info</strong> and <strong>Fatal</strong> output, other level code is no difference but the name and Withlevel.</p>
+<h3 id="package-global-variable-1">package global variable</h3>
+<p>after we finish the logger, we need to define a <strong>Logger</strong> object for our app to use. So, we open the <code>global/setting.go</code> file, add following contents.</p>
+<h4 id="settinggo-2">setting.go</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">var</span> <span class="p">(</span>
+	<span class="o">...</span>
+	<span class="nx">Logger</span>	<span class="o">*</span><span class="nx">logger</span><span class="p">.</span><span class="nx">Logger</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="initialization-1">initialization</h3>
+<p>next, we should modify the <code>main.go</code> in the root directory, add on initialization for the Logger object we just defined</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GO" data-lang="GO"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nf">setupSetting</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;init.setupSetting err: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nf">setupLogger</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;init.setupLogger err: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+<span class="kd">func</span> <span class="nf">setupSetting</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">setupLogger</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">global</span><span class="p">.</span><span class="nx">Logger</span> <span class="p">=</span> <span class="nx">logger</span><span class="p">.</span><span class="nf">NewLogger</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lumberjack</span><span class="p">.</span><span class="nx">Logger</span><span class="p">{</span>
+		<span class="nx">Filename</span><span class="p">:</span> <span class="nx">global</span><span class="p">.</span><span class="nx">AppSetting</span><span class="p">.</span><span class="nx">LogSavePath</span> <span class="o">+</span> <span class="s">&#34;/&#34;</span> <span class="o">+</span> <span class="nx">global</span><span class="p">.</span><span class="nx">AppSetting</span><span class="p">.</span><span class="nx">LogFileName</span> <span class="o">+</span> <span class="nx">global</span><span class="p">.</span><span class="nx">AppSetting</span><span class="p">.</span><span class="nx">LogFileExt</span><span class="p">,</span>
+		<span class="nx">MaxSize</span><span class="p">:</span>   <span class="mi">600</span><span class="p">,</span>
+		<span class="nx">MaxAge</span><span class="p">:</span>    <span class="mi">10</span><span class="p">,</span>
+		<span class="nx">LocalTime</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+	<span class="p">},</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">log</span><span class="p">.</span><span class="nx">LstdFlags</span><span class="p">).</span><span class="nf">WithCaller</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>we add logger component through this file, and initialize the global variable <code>Logger</code> inside method <code>setupLogger</code>. Being aware that we use <code>lumberjack</code> as logger&rsquo;s <strong>io.writer</strong>.</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-03-12</span>
+            </div>
+            <div class="post-info-license"><span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/gin-tutorial-2/index.md" target="_blank" rel="noopener noreferrer">Read Markdown</a>
+                        </span>|&nbsp;<span><a class="link-to-edit" href=https://github.com/HEIGE-PCloud/DoIt/edit/main/exampleSite/content/posts/Gin-Tutorial-2/index.md target="_blank" rel="noopener noreferrer">Edit this page</a>
+                            </span></div>
+            <div class="post-info-share">
+                <span><a href="#" onclick="return false;" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/gin-tutorial-2/" data-title="Gin-Tutorial-2" data-via="BigSnakeShawn" data-hashtags="Go,Backend"><i class="fab fa-twitter fa-fw"></i></a><a href="#" onclick="return false;" title="Share on Linkedin" data-sharer="linkedin" data-url="http://example.org/posts/gin-tutorial-2/"><i class="fab fa-linkedin fa-fw"></i></a><a href="#" onclick="return false;" title="Share on Reddit" data-sharer="reddit" data-url="http://example.org/posts/gin-tutorial-2/"><i class="fab fa-reddit fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/backend/">Backend</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/gin-tutorial-1/" class="prev" rel="prev" title="Gin-Tutorial-1"><i class="fas fa-angle-left fa-fw"></i>Gin-Tutorial-1</a></div>
+</div>
+<div id="comments"><div id="waline" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/">Waline</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.90.0">Hugo</a> | Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Aya</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div><script>
+                    if('serviceWorker' in navigator) {
+                        navigator.serviceWorker
+                            .register('/sw.min.js', { scope: '/' })
+                            .then(function(registration) {
+                                
+                            });
+                
+                        navigator.serviceWorker
+                            .ready
+                            .then(function(registration) {
+                                
+                            });
+                    }
+                </script></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/fuse/fuse.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/waline/Waline.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"waline":{"copyright":true,"dark":"body[theme='dark'], body[theme='black']","el":"#waline","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"highlight":true,"lang":"en","login":"enable","meta":["nick","mail","link"],"pageSize":10,"serverURL":"https://waline-york-shawn.vercel.app/","visitor":true}},"data":{"desktop-header-typeit":"Aya","mobile-header-typeit":"Aya"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":true,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"No results found","snippetLength":30,"threshold":0.1,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/lightgallery/lightgallery.min.css">
+    <noscript><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"></noscript></div>
+</body>
+
+</html>

@@ -33,7 +33,7 @@ theme = "DoIt"
 
 
   # public git repo url only then enableGitInfo is true
-  gitRepo = "https://github.com/dillonzq/LoveIt"
+  gitRepo = "https://github.com/York-Shawn/blog"
   
 
   [params.header]

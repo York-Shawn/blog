@@ -10,7 +10,7 @@ title = "Ayaの🎸Room"
 enableRobotsTXT = true
 # whether to use git commit log
 # 是否使用 git 信息
-enableGitInfo = false
+enableGitInfo = true
 # whether to use emoji code
 # 是否使用 emoji 代码
 enableEmoji = true
@@ -95,7 +95,7 @@ theme = "DoIt"
     fontawesome = true
     linkToMarkdown = true
     seriesNavigation = true
-    linkToEdit = "https://github.com/HEIGE-PCloud/DoIt/edit/main/exampleSite/content/{path}"
+    linkToEdit = "https://github.com/York-Shawn/blog/tree/main/content/{path}"
     rssFullText = false
     pageStyle = "normal"
     [params.page.toc]
@@ -179,7 +179,7 @@ theme = "DoIt"
         login = 'enable'
         wordLimit = 0
         pageSize = 10
-        uploadImage = false
+        uploadImage = true
         highlight = true
         mathTagSupport = false
         commentCount = true                                       # 代码高亮

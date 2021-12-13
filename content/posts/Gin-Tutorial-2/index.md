@@ -1,14 +1,18 @@
 ---
+weight: 2
 title: "Gin-Tutorial-2"
 subtitle: ""
 date: 2021-03-11T03:01:30+08:00
 lastmod: 2021-03-12T03:01:30+08:00
 draft: false
-author: "Aya"
+# authors: ["Aya"]
 authorLink: ""
 
 tags: ["Go", "Backend"]
 categories: ["Documentation"]
+series: ["gin-tutorial"]
+series_weight: 2
+seriesNavigation: true
 
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -28,8 +32,8 @@ license: '<a rel="license external nofollow noopener noreffer" href="https://cre
 In this chapter, we gonna make basic module and public module. These module seldom associate with core business, their task is to connect different parts of app, and make app a closed loop. 
 <!--more-->
 
-## Standerlized ErrorCode 
-### common errcode
+## 1. Standerlized ErrorCode 
+### 1.1 common errcode
 predefine common errcode in `pkg/errcode` to guide users
 ```GO
 var (
@@ -44,7 +48,7 @@ var (
 	TooManyRequests           = NewError(10000007, "请求过多")
 )
 ```
-### error handler
+### 1.2 error handler
 create errcode.go in `pkg/errcode`, write some public methods od error handling to standerlized our error output.
 #### errcode.go
 ```GO
@@ -120,12 +124,12 @@ func (e *Error) StatusCode() int {
 in the `common_code.go` we use **NewError** method to create Error structure as the response towards error. `codes` is the carrier of global errcode.
 
 **StatusCod** method is used for StatusCode transformation of specific errcode, given a Error and match its Code to common error and return the matched one.
-## Configuration Management
+## 2. Configuration Management
 use third party lib `viper` to manage conf
 
     go get -u github.com/spf13/viper
 
-### configuration file
+### 2.1 configuration file
 create config.yaml in `configs`
 #### configs.yaml
 ```yaml
@@ -156,7 +160,7 @@ in the configuration, we set the default settings for:
 * Server: server conf, gin's RunMode, default HTTP listening port, maximum read and write time
 * APP: Application conf, default page size, maximum page size and default log save path
 * Database: Database conf, required parameters of connecting to db instance
-## component
+## 3. component
 after configuration file, encapsulate the method of reading conf. create setting.go in `pkg/setting`
 #### setting.go
 ```GO
@@ -219,7 +223,7 @@ func (s *Setting) ReadSection(k string, v interface{}) error {
 	return nil
 }
 ```
-### package gloabl variable
+### 3.1 package gloabl variable
 To connect the conf and app, we should create global variable for us to use them.  
 setting.go in `global/`
 #### setting.go
@@ -230,9 +234,9 @@ var (
 	DatabaseSetting *setting.DatabaseSettingS
 )
 ```
-### initialize reading conf
+### 3.2 initialize reading conf
 back to main.go
-### main.go
+#### main.go
 ```GO
 func init() {
 	err := setupSetting()
@@ -268,7 +272,7 @@ func setupSetting() error {
 ```
 `init` is used for initialize process in app, and is run automatically.  
 Order is : init global variable => init method => main method 
-### modify server conf
+### 3.3 modify server conf
 all we need to do is to set the conf and RunMode of gin in `main.go`
 ```GO
 func main() {
@@ -284,12 +288,12 @@ func main() {
 	s.ListenAndServe()
 }
 ```
-## DataBase Connection
+## 4. DataBase Connection
 use third party lib **gorm**
 
 	go get -u github.com/jinzhu/gorm
 
-### component
+### 4.1 component
 add **NewDBEngine** method to *model.go* under `internal/model/`
 #### model.go
 ```GO
@@ -319,7 +323,7 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 }
 ```
 **NewDBEngine** create a DB instance, and add the import of `gorm` and initialize MySQL driver lib `github.com/jinzhu/gorm/dialects/mysql`
-### package global variable
+### 4.2 package global variable
 create db.go in `global`
 #### db.go  
 ```GO
@@ -327,9 +331,9 @@ var (
     DBEngine *gorm.DB
 )
 ```
-### initialization
+### 4.3 initialization
 add method **setupDBEngine** to main.go
-### main.go
+#### main.go
 ```GO
 func init() {
 	...
@@ -353,11 +357,11 @@ func setupDBEngine() error {
 	return nil
 }
 ```
-## Log
+## 5. Log
 
 	go get -u gopkg.in/natefinch/lumberjack.v2
 
-### log classification
+### 5.1 log classification
 create logger.go in `pkg/logger/`
 #### logger.go
 ```GO
@@ -393,9 +397,9 @@ func (l Level) String() string {
 }
 ```
 We predefine the specific types of Level and Fields in app log, and categorize into Debug, Info, Warn, Error, Fatal, Panic.
-### log standardization
+### 5.2 log standardization
 After categorize method, we shall work on methods for initialization of instance and standardized parameter binding
-### logger.go
+#### logger.go
 ```GO
 type Logger struct {
 	newLogger *log.Logger
@@ -466,8 +470,8 @@ WithContext: Set log context attribute
 WithCaller: Set one caller's information
 WithCallerFrames: Set all caller's information
 
-### log formatting & output
-### logger.go
+### 5.3 log formatting & output
+#### logger.go
 ```GO
 func (l *Logger) JSONFormat(level Level, message string) map[string]interface{} {
 	data := make(Fields, len(l.fields)+4)
@@ -505,8 +509,8 @@ func (l *Logger) Output(level Level, message string) {
 	}
 }
 ```
-### log classified output
-### logger.go
+### 5.4 log classified output
+#### logger.go
 ```GO
 func (l *Logger) Info(v ...interface{}) {
 	l.Output(LevelInfo, fmt.Sprint(v...))
@@ -527,7 +531,7 @@ func (l *Logger) Fatalf(format string, v ...interface{}) {
 ...
 ```
 code above just shows **info** and **Fatal** output, other level code is no difference but the name and Withlevel.
-### package global variable
+### 5.5 package global variable
 after we finish the logger, we need to define a **Logger** object for our app to use. So, we open the `global/setting.go` file, add following contents.
 #### setting.go
 ```GO
@@ -536,7 +540,7 @@ var (
 	Logger	*logger.Logger
 )
 ```
-### initialization
+### 5.6 initialization
 next, we should modify the `main.go` in the root directory, add on initialization for the Logger object we just defined
 ```GO
 func init() {

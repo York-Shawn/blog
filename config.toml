@@ -31,6 +31,8 @@ theme = "DoIt"
 
   enablePWA = true
 
+  license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+
 
   # public git repo url only then enableGitInfo is true
   gitRepo = "https://github.com/York-Shawn/blog"
@@ -69,6 +71,11 @@ theme = "DoIt"
     paginate = 20
     dateFormat = "01-02"
     rss = 10
+    [params.section.recentlyUpdated]
+      enable = true
+      rss = true
+      days = 30
+      maxCount = 10
   [params.list]
     paginate = 20
     dateFormat = "01-02"
@@ -284,6 +291,22 @@ theme = "DoIt"
     title = ""
     weight = 3
   [[menu.main]]
+    identifier = "series"
+    pre = ""
+    post = ""
+    name = "Series"
+    url = "/series/"
+    title = ""
+    weight = 4
+  [[menu.main]]
+    identifier = "about"
+    pre = ""
+    post = ""
+    name = "About"
+    url = "/about/"
+    title = ""
+    weight = 8
+  [[menu.main]]
     identifier = "github"
     pre = "<i class='fab fa-github fa-fw'></i>"
     post = ""
@@ -344,3 +367,11 @@ theme = "DoIt"
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   taxonomyTerm = ["HTML"]
+
+# Options for taxonomies
+# 用于分类的设置
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
+

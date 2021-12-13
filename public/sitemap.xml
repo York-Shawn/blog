@@ -2,12 +2,22 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://example.org/</loc><lastmod>2021-03-12T03:01:30&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/tags/backend/</loc><lastmod>2021-03-12T03:01:30&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/categories/</loc><lastmod>2021-03-12T03:01:30&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/categories/documentation/</loc><lastmod>2021-03-12T03:01:30&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/posts/gin-tutorial-2/</loc><lastmod>2021-03-12T03:01:30&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/tags/go/</loc><lastmod>2021-03-12T03:01:30&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/posts/</loc><lastmod>2021-03-12T03:01:30&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/tags/</loc><lastmod>2021-03-12T03:01:30&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/posts/gin-tutorial-1/</loc><lastmod>2021-03-10T03:06:56&#43;08:00</lastmod></url></urlset>
+            <loc>http://example.org/posts/gin-tutorial-2/</loc><lastmod>2021-12-13T23:00:11&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/</loc><lastmod>2021-12-13T23:00:11&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/backend/</loc><lastmod>2021-12-13T23:00:11&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/categories/</loc><lastmod>2021-12-13T23:00:11&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/go/</loc><lastmod>2021-12-13T23:00:11&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/</loc><lastmod>2021-12-13T23:00:11&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/</loc><lastmod>2021-12-13T23:00:11&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/gin-tutorial-1/</loc><lastmod>2021-12-13T23:00:11&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/git/</loc><lastmod>2020-10-17T23:05:41&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/problem-set/git/</loc><lastmod>2020-10-17T23:05:41&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/categories/problem-set/</loc><lastmod>2020-10-17T23:05:41&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/linux/</loc><lastmod>2020-09-23T23:05:04&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/wsl/</loc><lastmod>2020-09-23T23:05:04&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/problem-set/wsl/</loc><lastmod>2020-09-23T23:05:04&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/about/</loc><lastmod>2021-12-13T23:00:11&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/categories/documentation/</loc><lastmod>2021-12-12T19:50:50&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/series/gin-tutorial/</loc><lastmod>2021-12-13T23:00:11&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/offline/</loc></url><url>
+            <loc>http://example.org/series/</loc><lastmod>2021-12-13T23:00:11&#43;08:00</lastmod></url></urlset>

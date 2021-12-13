@@ -12,8 +12,8 @@ math:
   enable: true
 ---
 
-{{< image src = "logo.jpg">}}
-
+{{< music netease song 1357960254 >}}
+{{< image src="a.jpg" >}}
 ## Who Am I
 
 My name is Aya, half weeb and half engineer.
@@ -29,7 +29,7 @@ My name is Aya, half weeb and half engineer.
 * Mostly Listened Bands/Group: Hitorie, Zutomayo, ヨルシカ, Yoasobi, One Ok Rock, Guns N' Roses, BUMP OF CHICKEN, [Alexandros], Official髭男dism, TUYU
 * Mostly Listened Musician: 美波, 愛繆, 宇多田ヒカル, Bruno Mars
 
-{{< image src="5.jpg">}}
+{{< image src="b.png">}}
 ## Skill
 
 * Backend Development(Golang/JAVA)

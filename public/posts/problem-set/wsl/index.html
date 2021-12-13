@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">WSL2(Windows Subsystem for Linux) Problem Set - Ayaの🎸Room</title><meta name="Description" content="About LoveIt Theme"><meta property="og:title" content="WSL2(Windows Subsystem for Linux) Problem Set" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/problem-set/wsl/" /><meta property="og:image" content="http://example.org/posts/problem-set/wsl/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-09-23T23:05:04+08:00" />
+<meta property="article:modified_time" content="2020-09-23T23:05:04+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/posts/problem-set/wsl/featured-image.webp"/>
+<meta name="twitter:title" content="WSL2(Windows Subsystem for Linux) Problem Set"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="AyaのGuitar Room">
+<meta name="apple-mobile-web-app-title" content="AyaのGuitar Room">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/problem-set/wsl/" /><link rel="next" href="http://example.org/posts/problem-set/git/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "WSL2(Windows Subsystem for Linux) Problem Set",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/problem-set\/wsl\/"
+        },"genre": "posts","keywords": "Linux, WSL","wordcount":  576 ,
+        "url": "http:\/\/example.org\/posts\/problem-set\/wsl\/","datePublished": "2020-09-23T23:05:04+08:00","dateModified": "2020-09-23T23:05:04+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Aya"},"author": {
+                "@type": "Person",
+                "name": "Aya"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fix" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Ayaの🎸Room"><span class="header-title-pre"><i class="fas fa-code"></i></span><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/series/"> Series </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/York-Shawn" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Ayaの🎸Room"><span class="header-title-pre"><i class="fas fa-code"></i></span><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" onclick="return false;" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/series/" title="">Series</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/York-Shawn" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content always-active" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">WSL2(Windows Subsystem for Linux) Problem Set</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Aya</a>
+                </span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/problem-set/"><i class="far fa-folder fa-fw"></i>Problem-Set</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-23">2020-09-23</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2020-09-23">2020-09-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;576 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;<span id="/posts/problem-set/wsl/" class="leancloud_visitors" data-flag-title="WSL2(Windows Subsystem for Linux) Problem Set">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
+                    </span>&nbsp;<span id="/posts/problem-set/wsl/" class="comment_count" data-flag-title="WSL2(Windows Subsystem for Linux) Problem Set">
+                        <i class="far fa-comments fa-fw"></i>&nbsp;<span class="waline-comment-count" id="waline-comment-count"></span>&nbsp;comments
+                    </span>&nbsp;<span>
+                        <i class="fas fa-balance-scale fa-fw"></i>&nbsp;<span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>&nbsp;
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        data-src="/posts/problem-set/wsl/featured-image.webp"
+        data-srcset="/posts/problem-set/wsl/featured-image.webp, /posts/problem-set/wsl/featured-image.webp 1.5x, /posts/problem-set/wsl/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/posts/problem-set/wsl/featured-image.webp"
+        title="/posts/problem-set/wsl/featured-image.webp" height="511" width="1007"
+    /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1_make_-command-execute-correctly-but-the-site-cant-be-reached-for-some-reasonssolved">1.<em>make</em> command execute correctly, but the site can&rsquo;t be reached for some reasons.（Solved）</a>
+      <ul>
+        <li><a href="#ref">ref：</a></li>
+      </ul>
+    </li>
+    <li><a href="#2port-depolyed-at-0000-cant-be-accessed-from-windows-solved">2.Port depolyed at 0:0:0:0 can&rsquo;t be accessed from Windows. (Solved)</a>
+      <ul>
+        <li><a href="#ref-1">ref:</a></li>
+      </ul>
+    </li>
+    <li><a href="#3the-connection-from-windows-to-mysql-in-wsl2-failedsolved">3.The connection from Windows to MySQL in WSL2 failed(Solved)</a>
+      <ul>
+        <li><a href="#ref-2">ref:</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="1_make_-command-execute-correctly-but-the-site-cant-be-reached-for-some-reasonssolved">1.<em>make</em> command execute correctly, but the site can&rsquo;t be reached for some reasons.（Solved）</h2>
+<p>Description: By using <em>telnet</em> command, we can know certain port&rsquo;s status. As a result, the 1313 port of wsl is running by hugo, but that of windows is closed. Apparently, solve the disconnection between wsl and windows gonna handle this problem.</p>
+<h3 id="ref">ref：</h3>
+<blockquote>
+<p><a href="https://logi.im/script/achieving-access-to-files-and-resources-on-the-network-between-win10-and-wsl2.html" target="_blank" rel="noopener noreffer">https://logi.im/script/achieving-access-to-files-and-resources-on-the-network-between-win10-and-wsl2.html</a><br>
+<a href="https://www.cnblogs.com/hapjin/p/5367429.html" target="_blank" rel="noopener noreffer">https://www.cnblogs.com/hapjin/p/5367429.html</a></p>
+</blockquote>
+<p>For programs listen to <strong>0.0.0.0</strong> in wsl2, win10 can be accessed directly through localhost:port. Therefore we have to set bind address equal to 0.0.0.0 on hugo</p>
+<pre><code>hugo server --bind=0.0.0.0 --port=1313 --minify --theme book 
+</code></pre>
+<p>Reason: The default address of localhost is Loopback address <strong>127.0.0.1</strong>. It can only be accessed by local machine. So if we want to access wsl2 address from other consoles, we have to replace localhost in /etc/hosts.</p>
+<p>By adding new rule to hugo Makefile, type <code>make win</code> to create local blog on wsl2 that can be accessed on other machines</p>
+<pre><code>wsl win windows:  
+hugo server --bind=0.0.0.0 --port=1313 --minify --theme book  
+</code></pre>
+<h2 id="2port-depolyed-at-0000-cant-be-accessed-from-windows-solved">2.Port depolyed at 0:0:0:0 can&rsquo;t be accessed from Windows. (Solved)</h2>
+<p>Description: Almost the same with <strong>#problem 1</strong>, but Spring is running at 0:0:0:0. Spring-boot&rsquo;s port can&rsquo;t be browsed through Windows browser.</p>
+<h3 id="ref-1">ref:</h3>
+<blockquote>
+<p><a href="https://github.com/microsoft/WSL/discussions/2471" target="_blank" rel="noopener noreffer">https://github.com/microsoft/WSL/discussions/2471</a></p>
+</blockquote>
+<p>Using <code>wsl --shutdown</code> solved this problem, and we can also handle this by replacing localhost into the ip address of etho from <strong>ip addr</strong>(for some unknown reasons, the speed is way faster than using localhost)</p>
+<h2 id="3the-connection-from-windows-to-mysql-in-wsl2-failedsolved">3.The connection from Windows to MySQL in WSL2 failed(Solved)</h2>
+<p>Description: Connect to MySQL by setting ip as localhost(already set the bind_address=0.0.0.0), but it ended up failure.</p>
+<h3 id="ref-2">ref:</h3>
+<blockquote>
+<p><a href="https://github.com/microsoft/WSL/issues/4150" target="_blank" rel="noopener noreffer">https://github.com/microsoft/WSL/issues/4150</a><br>
+<a href="https://stackoverflow.com/questions/61002681/connecting-to-wsl2-server-via-local-network" target="_blank" rel="noopener noreffer">https://stackoverflow.com/questions/61002681/connecting-to-wsl2-server-via-local-network</a></p>
+</blockquote>
+<p>It seems like Ubuntu host is virtually connected to windows host, and it&rsquo;s netted by the Windows computer. To change that, we gonna forward the wsl2 port to windows, by using</p>
+<pre><code>netsh interface portproxy add v4tov4 listenport=&lt;port-to-listen&gt; listenaddress=0.0.0.0 connectport=&lt;port-to-forward&gt; connectaddress=&lt;forward-to-this-IP-address&gt;
+</code></pre>
+<p>Since then, there&rsquo;s another problem as the ip address of wsl2 is dynamic, it will change as you reboot. To improve this method, we should run a script every time we start our computer that does:</p>
+<ol>
+<li>Get Ip Address of WSL2 machine</li>
+<li>Remove previous port forwarding rules</li>
+<li>Add port Forwarding rules</li>
+<li>Remove previously added firewall rules</li>
+<li>Add new Firewall Rules</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">        $remoteport = bash.exe -c &#34;ifconfig eth0 | grep &#39;inet &#39;&#34;
+        $found = $remoteport -match &#39;\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}&#39;;
+
+        if( $found ){
+        $remoteport = $matches[0];
+        } else{
+        echo &#34;The Script Exited, the ip address of WSL 2 cannot be found&#34;;
+        exit;
+        }
+
+        #[Ports]
+
+        #All the ports you want to forward separated by coma
+        $ports=@(80,443,10000,3000,5000);
+
+
+        #[Static ip]
+        #You can change the addr to your ip config to listen to a specific address
+        $addr=&#39;0.0.0.0&#39;;
+        $ports_a = $ports -join &#34;,&#34;;
+
+
+        #Remove Firewall Exception Rules
+        iex &#34;Remove-NetFireWallRule -DisplayName &#39;WSL 2 Firewall Unlock&#39; &#34;;
+
+        #adding Exception Rules for inbound and outbound Rules
+        iex &#34;New-NetFireWallRule -DisplayName &#39;WSL 2 Firewall Unlock&#39; -Direction Outbound -LocalPort $ports_a -Action Allow -Protocol TCP&#34;;
+        iex &#34;New-NetFireWallRule -DisplayName &#39;WSL 2 Firewall Unlock&#39; -Direction Inbound -LocalPort $ports_a -Action Allow -Protocol TCP&#34;;
+
+        for( $i = 0; $i -lt $ports.length; $i++ ){
+        $port = $ports[$i];
+        iex &#34;netsh interface portproxy delete v4tov4 listenport=$port listenaddress=$addr&#34;;
+        iex &#34;netsh interface portproxy add v4tov4 listenport=$port listenaddress=$addr connectport=$port connectaddress=$remoteport&#34;;
+        }
+</code></pre></td></tr></table>
+</div>
+</div><p>The script must run under highest privilege. Use task scheduler to automatically start powershell and add argument as <code>-ExecutionPolicy Bypass c:\scripts\wslbridge.ps1</code>.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Navicat should change the ip to 127.0.0.1 instead of localhost.</div>
+        </div>
+    </div></div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-09-23</span>
+            </div>
+            <div class="post-info-license"><span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/problem-set/wsl/index.md" target="_blank" rel="noopener noreferrer">Read Markdown</a>
+                        </span>|&nbsp;<span><a class="link-to-edit" href=https://github.com/York-Shawn/blog/tree/main/content/posts/problem-set/wsl/index.md target="_blank" rel="noopener noreferrer">Edit this page</a>
+                            </span></div>
+            <div class="post-info-share">
+                <span><a href="#" onclick="return false;" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/problem-set/wsl/" data-title="WSL2(Windows Subsystem for Linux) Problem Set" data-via="BigSnakeShawn" data-hashtags="Linux,WSL"><i class="fab fa-twitter fa-fw"></i></a><a href="#" onclick="return false;" title="Share on Linkedin" data-sharer="linkedin" data-url="http://example.org/posts/problem-set/wsl/"><i class="fab fa-linkedin fa-fw"></i></a><a href="#" onclick="return false;" title="Share on Reddit" data-sharer="reddit" data-url="http://example.org/posts/problem-set/wsl/"><i class="fab fa-reddit fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/wsl/">WSL</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/problem-set/git/" class="next" rel="next" title="Git Problem Set">Git Problem Set<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="waline" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/">Waline</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.90.0">Hugo</a> | Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Aya</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div><script>
+                    if('serviceWorker' in navigator) {
+                        navigator.serviceWorker
+                            .register('/sw.min.js', { scope: '/' })
+                            .then(function(registration) {
+                                
+                            });
+                
+                        navigator.serviceWorker
+                            .ready
+                            .then(function(registration) {
+                                
+                            });
+                    }
+                </script></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/fuse/fuse.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/waline/Waline.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"waline":{"copyright":true,"dark":"body[theme='dark'], body[theme='black']","el":"#waline","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"highlight":true,"lang":"en","login":"enable","meta":["nick","mail","link"],"pageSize":10,"serverURL":"https://waline-york-shawn.vercel.app/","uploadImage":true,"visitor":true}},"data":{"desktop-header-typeit":"Aya","mobile-header-typeit":"Aya"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":true,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"No results found","snippetLength":30,"threshold":0.1,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/lightgallery/lightgallery.min.css">
+    <noscript><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"></noscript></div>
+</body>
+
+</html>

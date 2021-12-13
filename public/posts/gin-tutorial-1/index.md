@@ -2,7 +2,7 @@
 
 In this chapter, we majorly deal with `project structure`, `interface`, `router`.
 <!--more-->
-## structure
+## 1. Structure
 
 	blog-service
 	├── configs
@@ -19,7 +19,7 @@ In this chapter, we majorly deal with `project structure`, `interface`, `router`
 	├── scripts
 	└── third_party
 
-## Model
+## 2. Model
 
 The attributes of objects have in common should create an individual model to store
 
@@ -45,8 +45,8 @@ func (t Tag) TableName() string {
 	return "blog_tag"
 }
 ```
-## Router
-### Router management
+## 3. Router
+### 3.1 router management
 decide the business api and declare the create method in `internal/routers` 
 ```go
 router.go
@@ -74,7 +74,7 @@ func NewRouter() *gin.Engine {
 	return r
 }
 ```
-### Router handler
+### 3.2 Router handler
 api handler should be stored inside the `internal/routers/api`, dir name is the api's version
 #### tag.go
 ```go
@@ -90,7 +90,7 @@ func (t Tag) Create(c *gin.Context) {}
 func (t Tag) Update(c *gin.Context) {}
 func (t Tag) Delete(c *gin.Context) {}
 ```
-### Boot access
+### 3.3 Boot access
 modify `main.go`, set parameters like TCP Endpoint, Readtime of `http.Server`
 #### main.go
 ```go

@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Gin Tutorial - Series - Ayaの🎸Room</title>
+        <link>http://example.org/series/gin-tutorial/</link>
+        <description>Gin Tutorial - Series - Ayaの🎸Room</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>yorkshawn007@gmail.com (Aya)</managingEditor>
+            <webMaster>yorkshawn007@gmail.com (Aya)</webMaster><atom:link href="http://example.org/series/gin-tutorial/" rel="self" type="application/rss+xml" /><item>
+    <title>Gin-Tutorial-2</title>
+    <link>http://example.org/posts/gin-tutorial-2/</link>
+    <pubDate>Thu, 11 Mar 2021 03:01:30 &#43;0800</pubDate><author>
+        <name>Aya</name>
+    </author><guid>http://example.org/posts/gin-tutorial-2/</guid>
+    <description><![CDATA[<p>In this chapter, we gonna make basic module and public module. These module seldom associate with core business, their task is to connect different parts of app, and make app a closed loop.</p>]]></description>
+</item><item>
+    <title>Gin-Tutorial-1</title>
+    <link>http://example.org/posts/gin-tutorial-1/</link>
+    <pubDate>Wed, 10 Mar 2021 03:06:56 &#43;0800</pubDate><author>
+        <name>Aya</name>
+    </author><guid>http://example.org/posts/gin-tutorial-1/</guid>
+    <description><![CDATA[<p>In this chapter, we majorly deal with <code>project structure</code>, <code>interface</code>, <code>router</code>.</p>]]></description>
+</item></channel>
+</rss>

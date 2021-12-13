@@ -1,5 +1,4 @@
 ---
-weight: 1
 title: "Gin-Tutorial-1"
 date: 2021-03-10T03:06:56+08:00
 # authors: ["Aya"]

@@ -4,7 +4,7 @@
         <link>http://example.org/categories/documentation/</link>
         <description>Documentation - Category - Ayaの🎸Room</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>yorkshawn007@gmail.com (Aya)</managingEditor>
-            <webMaster>yorkshawn007@gmail.com (Aya)</webMaster><lastBuildDate>Thu, 11 Mar 2021 03:01:30 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/documentation/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>yorkshawn007@gmail.com (Aya)</webMaster><atom:link href="http://example.org/categories/documentation/" rel="self" type="application/rss+xml" /><item>
     <title>Gin-Tutorial-2</title>
     <link>http://example.org/posts/gin-tutorial-2/</link>
     <pubDate>Thu, 11 Mar 2021 03:01:30 &#43;0800</pubDate><author>

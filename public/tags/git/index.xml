@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Git - Tag - Ayaの🎸Room</title>
+        <link>http://example.org/tags/git/</link>
+        <description>Git - Tag - Ayaの🎸Room</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>yorkshawn007@gmail.com (Aya)</managingEditor>
+            <webMaster>yorkshawn007@gmail.com (Aya)</webMaster><lastBuildDate>Sat, 17 Oct 2020 23:05:41 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/git/" rel="self" type="application/rss+xml" /><item>
+    <title>Git Problem Set</title>
+    <link>http://example.org/posts/problem-set/git/</link>
+    <pubDate>Sat, 17 Oct 2020 23:05:41 &#43;0800</pubDate><author>
+        <name>Aya</name>
+    </author><guid>http://example.org/posts/problem-set/git/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/featured-image.webp" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item></channel>
+</rss>

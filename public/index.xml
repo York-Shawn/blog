@@ -20,5 +20,23 @@
         <name>Aya</name>
     </author><guid>http://example.org/posts/gin-tutorial-1/</guid>
     <description><![CDATA[<p>In this chapter, we majorly deal with <code>project structure</code>, <code>interface</code>, <code>router</code>.</p>]]></description>
+</item><item>
+    <title>Git Problem Set</title>
+    <link>http://example.org/posts/problem-set/git/</link>
+    <pubDate>Sat, 17 Oct 2020 23:05:41 &#43;0800</pubDate><author>
+        <name>Aya</name>
+    </author><guid>http://example.org/posts/problem-set/git/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/featured-image.webp" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item><item>
+    <title>WSL2(Windows Subsystem for Linux) Problem Set</title>
+    <link>http://example.org/posts/problem-set/wsl/</link>
+    <pubDate>Wed, 23 Sep 2020 23:05:04 &#43;0800</pubDate><author>
+        <name>Aya</name>
+    </author><guid>http://example.org/posts/problem-set/wsl/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/featured-image.webp" referrerpolicy="no-referrer">
+            </div>]]></description>
 </item></channel>
 </rss>

@@ -1,5 +1,5 @@
 ---
-title: "WSL2(Windows Subsystem for Linux) Problem Set"
+title: "WSL2 Problem Set"
 subtitle: ""
 date: 2020-09-23T23:05:04+08:00
 lastmod: 2020-09-23T23:05:04+08:00
@@ -25,11 +25,11 @@ license: '<a rel="license external nofollow noopener noreffer" href="https://cre
 ---
 
 <!--more-->
-## 1._make_ command execute correctly, but the site can't be reached for some reasons.（Solved）
+## 1._make_ command execute correctly, but the site can't be reached for some reasons.
 
 Description: By using _telnet_ command, we can know certain port's status. As a result, the 1313 port of wsl is running by hugo, but that of windows is closed. Apparently, solve the disconnection between wsl and windows gonna handle this problem.
 
-### ref：  
+ref：  
 >[https://logi.im/script/achieving-access-to-files-and-resources-on-the-network-between-win10-and-wsl2.html](https://logi.im/script/achieving-access-to-files-and-resources-on-the-network-between-win10-and-wsl2.html)  
 [https://www.cnblogs.com/hapjin/p/5367429.html](https://www.cnblogs.com/hapjin/p/5367429.html)
 
@@ -44,21 +44,21 @@ By adding new rule to hugo Makefile, type `make win` to create local blog on wsl
     wsl win windows:  
     hugo server --bind=0.0.0.0 --port=1313 --minify --theme book  
 
-## 2.Port depolyed at 0:0:0:0 can't be accessed from Windows. (Solved)
+## 2.Port depolyed at 0:0:0:0 can't be accessed from Windows.
 
 Description: Almost the same with **#problem 1**, but Spring is running at 0:0:0:0. Spring-boot's port can't be browsed through Windows browser. 
 
-### ref:
+ref:
 >[https://github.com/microsoft/WSL/discussions/2471](https://github.com/microsoft/WSL/discussions/2471)
 
 Using `wsl --shutdown` solved this problem, and we can also handle this by replacing localhost into the ip address of etho from **ip addr**(for some unknown reasons, the speed is way faster than using localhost)
 
 
-## 3.The connection from Windows to MySQL in WSL2 failed(Solved)
+## 3.The connection from Windows to MySQL in WSL2 failed
 
 Description: Connect to MySQL by setting ip as localhost(already set the bind_address=0.0.0.0), but it ended up failure.
 
-### ref:
+ref:
 >[https://github.com/microsoft/WSL/issues/4150](https://github.com/microsoft/WSL/issues/4150)  
 >[https://stackoverflow.com/questions/61002681/connecting-to-wsl2-server-via-local-network](https://stackoverflow.com/questions/61002681/connecting-to-wsl2-server-via-local-network)
 
@@ -114,3 +114,17 @@ The script must run under highest privilege. Use task scheduler to automatically
 {{< admonition type=tip >}}
   Navicat should change the ip to 127.0.0.1 instead of localhost.
 {{< /admonition>}}
+
+## 4.Temporary failure resolving 'security.ubuntu.com'
+
+Description: get output `Temporary failure resolving 'security.ubuntu.com'` after doing `sudo apt update`
+
+ref:
+[https://stackoverflow.com/questions/60269422/windows10-wsl2-ubuntu-debian-no-network](https://stackoverflow.com/questions/60269422/windows10-wsl2-ubuntu-debian-no-network)
+
+1. create file `/etc/wsl.conf`
+2. write
+   
+        [network]  
+        generateResolvConf = false
+3. change `nameserver xxx.xx.x.x` into `nameserver 8.8.8.8`  

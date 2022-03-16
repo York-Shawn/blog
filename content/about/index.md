@@ -18,6 +18,8 @@ math:
 
 My name is Shawn, a Computer Science Student from Chengdu/China.
 
+[Resume](CIS_Grad_Template__Dev___1_.pdf)
+
 * Hobby: Music, Food, Anime
 * Favorite Music: J-Pop, Rock, Jazz, Blues
 * Favorite Band/Musician: ヨルシカ

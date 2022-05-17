@@ -18,8 +18,6 @@ math:
 
 My name is Shawn, a Computer Science Student from Chengdu/China.
 
-## Here's my [Resume](CIS_Grad_Template__Dev___1_.pdf)
-
 * Hobby: Music, Food, Anime
 * Favorite Music: J-Pop, Rock, Jazz, Blues
 * Favorite Band/Musician: ヨルシカ
@@ -29,8 +27,9 @@ My name is Shawn, a Computer Science Student from Chengdu/China.
 {{< image src="b.png">}}
 ## Skill
 
-* Backend Development(Golang/JAVA)
+* Backend Development(Golang)
 * Frontend Development(Vue)
+* Tools(k8s, Docker, MySQL, Postgre, Git, Github Action)
 
 {{< image src="2.jpg">}}
 {{< image src="3.jpg">}}

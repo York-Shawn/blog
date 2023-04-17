@@ -20,7 +20,7 @@ theme = "DoIt"
 
 [params]
   # LoveIt theme version
-  version = "0.2.X"
+  version = "0.3.X"
 
   description = "About LoveIt Theme"
   # site keywords

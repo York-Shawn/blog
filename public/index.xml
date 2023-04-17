@@ -4,7 +4,7 @@
         <link>http://example.org/</link>
         <description>About LoveIt Theme</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>yorkshawn007@gmail.com (Aya)</managingEditor>
-            <webMaster>yorkshawn007@gmail.com (Aya)</webMaster><lastBuildDate>Thu, 11 Mar 2021 03:01:30 &#43;0800</lastBuildDate>
+            <webMaster>yorkshawn007@gmail.com (Aya)</webMaster><lastBuildDate>Fri, 31 Dec 2021 20:32:56 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>Gin-Tutorial-2</title>
@@ -13,6 +13,13 @@
         <name>Aya</name>
     </author><guid>http://example.org/posts/gin-tutorial-2/</guid>
     <description><![CDATA[<p>In this chapter, we gonna make basic module and public module. These module seldom associate with core business, their task is to connect different parts of app, and make app a closed loop.</p>]]></description>
+</item><item>
+    <title>Gin-Tutorial-3</title>
+    <link>http://example.org/posts/gin-tutorial-3/</link>
+    <pubDate>Fri, 31 Dec 2021 20:32:56 &#43;0800</pubDate><author>
+        <name>Aya</name>
+    </author><guid>http://example.org/posts/gin-tutorial-3/</guid>
+    <description><![CDATA[<p>This chapter is about <strong>Tag Management Module</strong> development</p>]]></description>
 </item><item>
     <title>Gin-Tutorial-1</title>
     <link>http://example.org/posts/gin-tutorial-1/</link>
@@ -30,7 +37,7 @@
                 <img src="/featured-image.webp" referrerpolicy="no-referrer">
             </div>]]></description>
 </item><item>
-    <title>WSL2(Windows Subsystem for Linux) Problem Set</title>
+    <title>WSL2 Problem Set</title>
     <link>http://example.org/posts/problem-set/wsl/</link>
     <pubDate>Wed, 23 Sep 2020 23:05:04 &#43;0800</pubDate><author>
         <name>Aya</name>

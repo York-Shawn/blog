@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">Gin-Tutorial-3 - Ayaの🎸Room</title><meta name="Description" content="About LoveIt Theme"><meta property="og:title" content="Gin-Tutorial-3" />
+<meta property="og:description" content="This chapter is about Tag Management Module development" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/gin-tutorial-3/" /><meta property="og:image" content="http://example.org/posts/gin-tutorial-3/featured-image.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-31T20:32:56+08:00" />
+<meta property="article:modified_time" content="2022-02-09T21:37:49+08:00" />
+<meta property="og:see_also" content="http://example.org/posts/gin-tutorial-1/" /><meta property="og:see_also" content="http://example.org/posts/gin-tutorial-2/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/posts/gin-tutorial-3/featured-image.jpg"/>
+<meta name="twitter:title" content="Gin-Tutorial-3"/>
+<meta name="twitter:description" content="This chapter is about Tag Management Module development"/>
+<meta name="application-name" content="AyaのGuitar Room">
+<meta name="apple-mobile-web-app-title" content="AyaのGuitar Room">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/gin-tutorial-3/" /><link rel="prev" href="http://example.org/posts/gin-tutorial-1/" /><link rel="next" href="http://example.org/posts/gin-tutorial-2/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Gin-Tutorial-3",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/gin-tutorial-3\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/example.org\/posts\/gin-tutorial-3\/featured-image.jpg",
+                            "width":  800 ,
+                            "height":  320 
+                        }],"genre": "posts","keywords": "Go, Backend","wordcount":  1763 ,
+        "url": "http:\/\/example.org\/posts\/gin-tutorial-3\/","datePublished": "2021-12-31T20:32:56+08:00","dateModified": "2022-02-09T21:37:49+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Aya"},"author": {
+                "@type": "Person",
+                "name": "Aya"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fix" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Ayaの🎸Room"><span class="header-title-pre"><i class="fas fa-code"></i></span><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/series/"> Series </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/York-Shawn" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Ayaの🎸Room"><span class="header-title-pre"><i class="fas fa-code"></i></span><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" onclick="return false;" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/series/" title="">Series</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/York-Shawn" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content always-active" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Gin-Tutorial-3</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Aya</a>
+                </span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/document/"><i class="far fa-folder fa-fw"></i>Document</a></span>&nbsp;<span class="post-category">and</span>&nbsp;<span class="post-series">series <a href="/series/gin-tutorial/"><i class="far fa-list-alt fa-fw"></i>Gin Tutorial</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-12-31">2021-12-31</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2022-02-09">2022-02-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1763 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;9 minutes&nbsp;<span>
+                        <i class="fas fa-balance-scale fa-fw"></i>&nbsp;<span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>&nbsp;
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        data-src="/posts/gin-tutorial-3/featured-image.jpg"
+        data-srcset="/posts/gin-tutorial-3/featured-image.jpg, /posts/gin-tutorial-3/featured-image.jpg 1.5x, /posts/gin-tutorial-3/featured-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/gin-tutorial-3/featured-image.jpg"
+        title="/posts/gin-tutorial-3/featured-image.jpg" height="320" width="800"
+    /></div>
+                    
+                        
+                        <div class="details series-nav open">
+                            <div class="details-summary series-title">
+                                <span>Series - Gin Tutorial</span>
+                                <span><i class="details-icon fas fa-angle-right"></i></span>
+                            </div>
+                            <div class="details-content series-content">
+                                <nav>
+                                    <ul>
+                                        
+                                            
+                                                <li><a href="/posts/gin-tutorial-1/">Gin-Tutorial-1</a></li>
+                                            
+                                        
+                                            
+                                                <li><a href="/posts/gin-tutorial-2/">Gin-Tutorial-2</a></li>
+                                            
+                                        
+                                            
+                                                <li><span class="active">Gin-Tutorial-3</span></li>
+                                            
+                                        
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#31-create-model-method">3.1 Create <em>model</em> method</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#taggo">tag.go</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#32-model-callback">3.2 model callback</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#modelgo">model.go</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#33-build-dao-method">3.3 Build dao method</a></li>
+    <li><a href="#34-service-method">3.4 Service method</a></li>
+    <li><a href="#35-new-err-code">3.5 New err	 code</a></li>
+    <li><a href="#36-new-router-method">3.6 New router method</a></li>
+    <li><a href="#37-problem">3.7 Problem</a></li>
+    <li><a href="#38-summary">3.8 Summary</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>This chapter is about <strong>Tag Management Module</strong> development</p>
+<h2 id="31-create-model-method">3.1 Create <em>model</em> method</h2>
+<p>first we need to deal with tag table, create <strong>tag.go</strong> under <code>internal/model</code>, then encapsulate operation of tag model.</p>
+<h4 id="taggo">tag.go</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="nx">Tag</span><span class="p">)</span> <span class="nf">Count</span><span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">count</span> <span class="kt">int</span>
+	<span class="k">if</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Name</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+		<span class="nx">db</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;name = ?&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">db</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;state = ?&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">State</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">t</span><span class="p">).</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;is_del = ?&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="nf">Count</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">count</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">err</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">count</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="nx">Tag</span><span class="p">)</span> <span class="nf">List</span><span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span> <span class="nx">pageOffset</span><span class="p">,</span> <span class="nx">pageSize</span> <span class="kt">int</span><span class="p">)</span> <span class="p">([]</span><span class="o">*</span><span class="nx">Tag</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">tags</span> <span class="p">[]</span><span class="o">*</span><span class="nx">Tag</span>
+	<span class="kd">var</span> <span class="nx">err</span> <span class="kt">error</span>
+	<span class="k">if</span> <span class="nx">pageOffset</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">pageSize</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+		<span class="nx">db</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Offset</span><span class="p">(</span><span class="nx">pageOffset</span><span class="p">).</span><span class="nf">Limit</span><span class="p">(</span><span class="nx">pageSize</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Name</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+		<span class="nx">db</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;name = ?&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">db</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;state = ?&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">State</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;is_del = ?&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="nf">Find</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">tags</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">tags</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="nx">Tag</span><span class="p">)</span> <span class="nf">Create</span><span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">t</span><span class="p">).</span><span class="nx">Error</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="nx">Tag</span><span class="p">)</span> <span class="nf">Update</span><span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span> <span class="nx">values</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Model</span><span class="p">(</span><span class="nx">t</span><span class="p">).</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id = ? AND is_del = ?&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="nf">Updates</span><span class="p">(</span><span class="nx">values</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="nx">Tag</span><span class="p">)</span> <span class="nf">Delete</span><span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id = ? AND is_del = ?&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="nf">Delete</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">t</span><span class="p">).</span><span class="nx">Error</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="nx">Tag</span><span class="p">)</span> <span class="nf">Get</span><span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span> <span class="p">(</span><span class="nx">Tag</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">tag</span> <span class="nx">Tag</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id = ? AND is_del = ? AND state = ?&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">State</span><span class="p">).</span><span class="nf">First</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">tag</span><span class="p">).</span><span class="nx">Error</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="nx">gorm</span><span class="p">.</span><span class="nx">ErrRecordNotFound</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">err</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">tag</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Model: specify the model which runs DB operation</li>
+<li>Where: set filter, accept <strong>map</strong>, <strong>struct</strong>, <strong>string</strong> as conditions</li>
+<li>Offset: specify the numbers of records to skip before return the records</li>
+<li>Limit: specify the number of records to be retrieved</li>
+</ul>
+<h2 id="32-model-callback">3.2 model callback</h2>
+<p>for public fields like <strong>CreatedOn</strong>, <strong>ModifiedOn</strong>, we can set model callback to handle them.<br>
+In Gorm, supported callback methods are as follow :</p>
+<ul>
+<li>register a new callback</li>
+<li>delete current callback</li>
+<li>replace current callback</li>
+<li>register order of callback<br>
+In the project we are using &ldquo;replace current callback&rdquo;. Open <strong>model.go</strong> under <code>internal/model</code>, then write callback code for model
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">callback method should be placed after <code>NewDBEngine</code></div>
+        </div>
+    </div></li>
+</ul>
+<h4 id="modelgo">model.go</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="nf">NewDBEngine</span><span class="p">(</span><span class="nx">databaseSetting</span> <span class="o">*</span><span class="nx">setting</span><span class="p">.</span><span class="nx">DatabaseSettingS</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="o">...</span>
+	<span class="nx">db</span><span class="p">.</span><span class="nf">SingularTable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+	<span class="nx">db</span><span class="p">.</span><span class="nf">Callback</span><span class="p">().</span><span class="nf">Create</span><span class="p">().</span><span class="nf">Replace</span><span class="p">(</span><span class="s">&#34;gorm:update_time_stamp&#34;</span><span class="p">,</span> <span class="nx">updateTimeStampForCreateCallback</span><span class="p">)</span>
+	<span class="nx">db</span><span class="p">.</span><span class="nf">Callback</span><span class="p">().</span><span class="nf">Update</span><span class="p">().</span><span class="nf">Replace</span><span class="p">(</span><span class="s">&#34;gorm:update_time_stamp&#34;</span><span class="p">,</span> <span class="nx">updateTimeStampForUpdateCallback</span><span class="p">)</span>
+	<span class="nx">db</span><span class="p">.</span><span class="nf">Callback</span><span class="p">().</span><span class="nf">Delete</span><span class="p">().</span><span class="nf">Replace</span><span class="p">(</span><span class="s">&#34;gorm:delete&#34;</span><span class="p">,</span> <span class="nx">deleteCallback</span><span class="p">)</span>
+	<span class="nx">db</span><span class="p">.</span><span class="nf">DB</span><span class="p">().</span><span class="nf">SetMaxIdleConns</span><span class="p">(</span><span class="nx">databaseSetting</span><span class="p">.</span><span class="nx">MaxIdleConns</span><span class="p">)</span>
+	<span class="nx">db</span><span class="p">.</span><span class="nf">DB</span><span class="p">().</span><span class="nf">SetMaxOpenConns</span><span class="p">(</span><span class="nx">databaseSetting</span><span class="p">.</span><span class="nx">MaxOpenConns</span><span class="p">)</span>
+
+	<span class="k">return</span> <span class="nx">db</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">updateTimestampForCreateCallback</span><span class="p">(</span><span class="nx">scope</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Scope</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">!</span><span class="nx">scope</span><span class="p">.</span><span class="nf">HasError</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">nowTime</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">()</span>
+		<span class="k">if</span> <span class="nx">createTimeField</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">scope</span><span class="p">.</span><span class="nf">FieldByName</span><span class="p">(</span><span class="s">&#34;CreatedOn&#34;</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="nx">createTimeField</span><span class="p">.</span><span class="nx">IsBlank</span> <span class="p">{</span>
+				<span class="nx">_</span> <span class="p">=</span> <span class="nx">createTimeField</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">nowTime</span><span class="p">)</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+
+		<span class="k">if</span> <span class="nx">modifyTimeField</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">scope</span><span class="p">.</span><span class="nf">FieldByName</span><span class="p">(</span><span class="s">&#34;ModifiedOn&#34;</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="nx">modifyTimeField</span><span class="p">.</span><span class="nx">IsBlank</span> <span class="p">{</span>
+				<span class="nx">_</span> <span class="p">=</span> <span class="nx">modifyTimeField</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">nowTime</span><span class="p">)</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">updateTimeStampForUpdateCallback</span><span class="p">(</span><span class="nx">scope</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Scope</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">scope</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;gorm.update_column&#34;</span><span class="p">);</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+		<span class="nx">_</span> <span class="p">=</span> <span class="nx">scope</span><span class="p">.</span><span class="nf">SetColumn</span><span class="p">(</span><span class="s">&#34;ModifiedOn&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">deleteCallback</span><span class="p">(</span><span class="nx">scope</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Scope</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">!</span><span class="nx">scope</span><span class="p">.</span><span class="nf">HasError</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">extraOption</span> <span class="kt">string</span>
+		<span class="k">if</span> <span class="nx">str</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">scope</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;gorm:delete_option&#34;</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+			<span class="nx">extraOption</span> <span class="p">=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprint</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>
+		<span class="p">}</span>
+
+		<span class="nx">deletedOnField</span><span class="p">,</span> <span class="nx">hasDeletedOnField</span> <span class="o">:=</span> <span class="nx">scope</span><span class="p">.</span><span class="nf">FieldByName</span><span class="p">(</span><span class="s">&#34;DeletedOn&#34;</span><span class="p">)</span>
+		<span class="nx">isDelField</span><span class="p">,</span> <span class="nx">hasIsDelField</span> <span class="o">:=</span> <span class="nx">scope</span><span class="p">.</span><span class="nf">FieldByName</span><span class="p">(</span><span class="s">&#34;IsDel&#34;</span><span class="p">)</span>
+		<span class="k">if</span> <span class="p">!</span><span class="nx">scope</span><span class="p">.</span><span class="nx">Search</span><span class="p">.</span><span class="nx">Unscoped</span> <span class="o">&amp;&amp;</span> <span class="nx">hasDeletedOnField</span> <span class="o">&amp;&amp;</span> <span class="nx">hasIsDelField</span> <span class="p">{</span>
+			<span class="nx">now</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">()</span>
+			<span class="nx">scope</span><span class="p">.</span><span class="nf">Raw</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span>
+				<span class="s">&#34;UPDATE %v SET %v=%v,%v=%v%v%v&#34;</span><span class="p">,</span>
+				<span class="nx">scope</span><span class="p">.</span><span class="nf">QuotedTableName</span><span class="p">(),</span>
+				<span class="nx">scope</span><span class="p">.</span><span class="nf">Quote</span><span class="p">(</span><span class="nx">deletedOnField</span><span class="p">.</span><span class="nx">DBName</span><span class="p">),</span>
+				<span class="nx">scope</span><span class="p">.</span><span class="nf">AddToVars</span><span class="p">(</span><span class="nx">now</span><span class="p">),</span>
+				<span class="nx">scope</span><span class="p">.</span><span class="nf">Quote</span><span class="p">(</span><span class="nx">isDelField</span><span class="p">.</span><span class="nx">DBName</span><span class="p">),</span>
+				<span class="nx">scope</span><span class="p">.</span><span class="nf">AddToVars</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+				<span class="nf">addExtraSpaceIfExist</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nf">CombinedConditionSql</span><span class="p">()),</span>
+				<span class="nf">addExtraSpaceIfExist</span><span class="p">(</span><span class="nx">extraOption</span><span class="p">),</span>
+			<span class="p">)).</span><span class="nf">Exec</span><span class="p">()</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="nx">scope</span><span class="p">.</span><span class="nf">Raw</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span>
+				<span class="s">&#34;DELETE FROM %v%v%v&#34;</span><span class="p">,</span>
+				<span class="nx">scope</span><span class="p">.</span><span class="nf">QuotedTableName</span><span class="p">(),</span>
+				<span class="nf">addExtraSpaceIfExist</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nf">CombinedConditionSql</span><span class="p">()),</span>
+				<span class="nf">addExtraSpaceIfExist</span><span class="p">(</span><span class="nx">extraOption</span><span class="p">),</span>
+			<span class="p">)).</span><span class="nf">Exec</span><span class="p">()</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">addExtraSpaceIfExist</span><span class="p">(</span><span class="nx">str</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">str</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="nx">str</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="s">&#34;&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>scope.FieldByName is used to find <code>gorm.Field</code> with field name or db name</li>
+<li>scope.Get(&ldquo;gorm:update_column&rdquo;) is used to get setting by name</li>
+</ul>
+<h2 id="33-build-dao-method">3.3 Build dao method</h2>
+<p>create <strong>dao.go</strong> under <code>internal/dao</code>, and write following code</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">type</span> <span class="nx">Dao</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">engine</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">New</span><span class="p">(</span><span class="nx">engine</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span> <span class="o">*</span><span class="nx">Dao</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">Dao</span><span class="p">{</span><span class="nx">engine</span><span class="p">:</span> <span class="nx">engine</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>create <strong>tag.go</strong> at the same directory, which doing dao operation for tag model</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Dao</span><span class="p">)</span> <span class="nf">CountTag</span><span class="p">(</span><span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">state</span> <span class="kt">uint8</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">tag</span> <span class="o">:=</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Tag</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">State</span><span class="p">:</span> <span class="nx">state</span><span class="p">}</span>
+	<span class="k">return</span> <span class="nx">tag</span><span class="p">.</span><span class="nx">Count</span><span class="p">{</span><span class="nx">d</span><span class="p">.</span><span class="nx">engine</span><span class="p">}</span>
+<span class="p">}</span> 
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Dao</span><span class="p">)</span> <span class="nf">GetTagList</span><span class="p">(</span><span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">state</span> <span class="kt">uint8</span><span class="p">,</span> <span class="nx">page</span><span class="p">,</span> <span class="nx">pageSize</span> <span class="kt">int</span><span class="p">)</span> <span class="p">([]</span><span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Tag</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">tag</span> <span class="o">:=</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Tag</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">State</span><span class="p">:</span> <span class="nx">state</span><span class="p">}</span>
+	<span class="nx">pageOffset</span> <span class="o">:=</span> <span class="nx">app</span><span class="p">.</span><span class="nf">GetPageOffset</span><span class="p">(</span><span class="nx">page</span><span class="p">,</span> <span class="nx">pageSize</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">tag</span><span class="p">.</span><span class="nf">List</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">engine</span><span class="p">,</span> <span class="nx">pageOffset</span><span class="p">,</span> <span class="nx">pageSize</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Dao</span><span class="p">)</span> <span class="nf">CreateTag</span><span class="p">(</span><span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">state</span> <span class="kt">uint8</span><span class="p">,</span> <span class="nx">createdBy</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">tag</span> <span class="o">:=</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Tag</span><span class="p">{</span>
+		<span class="nx">Name</span><span class="p">:</span>  <span class="nx">name</span><span class="p">,</span>
+		<span class="nx">State</span><span class="p">:</span> <span class="nx">state</span><span class="p">,</span>
+		<span class="nx">Model</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">Model</span><span class="p">{</span><span class="nx">CreatedBy</span><span class="p">:</span> <span class="nx">createdBy</span><span class="p">},</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">tag</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">engine</span><span class="p">)</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Dao</span><span class="p">)</span> <span class="nf">UpdateTag</span><span class="p">(</span><span class="nx">id</span> <span class="kt">uint32</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">state</span> <span class="kt">uint8</span><span class="p">,</span> <span class="nx">modifiedBy</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">tag</span> <span class="o">:=</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Tag</span> <span class="p">{</span>
+		<span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span>
+		<span class="nx">State</span><span class="p">:</span> <span class="nx">state</span><span class="p">,</span>
+		<span class="nx">Model</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">Model</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">ModifiedBy</span><span class="p">:</span> <span class="nx">modifiedBy</span><span class="p">},</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">tag</span><span class="p">.</span><span class="nf">Update</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">engine</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Dao</span><span class="p">)</span> <span class="nf">DeleteTag</span><span class="p">(</span><span class="nx">id</span> <span class="kt">uint32</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">tag</span> <span class="o">:=</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Tag</span><span class="p">{</span><span class="nx">Model</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">Model</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">}}</span>
+	<span class="k">return</span> <span class="nx">tag</span><span class="p">.</span><span class="nf">Delete</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">engine</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>code above encapsulate data accessing object in dao, and precess needed field</p>
+<h2 id="34-service-method">3.4 Service method</h2>
+<p>create <strong>service.go</strong> under <code>internal/service</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">type</span> <span class="nx">Service</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span>
+	<span class="nx">dao</span> <span class="o">*</span><span class="nx">dao</span><span class="p">.</span><span class="nx">Dao</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">New</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="nx">Service</span> <span class="p">{</span>
+	<span class="nx">svc</span> <span class="o">:=</span> <span class="nx">Service</span><span class="p">{</span><span class="nx">ctx</span><span class="p">:</span> <span class="nx">ctx</span><span class="p">}</span>
+	<span class="nx">svc</span><span class="p">.</span><span class="nx">dao</span> <span class="p">=</span> <span class="nx">dao</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">global</span><span class="p">.</span><span class="nx">DBEngine</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">svc</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>create <strong>tag.go</strong> under same directory, precess business logic of tag module</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">type</span> <span class="nx">CountTagRequest</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Name</span>  <span class="kt">string</span> <span class="s">`form:&#34;name&#34; binding:&#34;max=100&#34;`</span>
+	<span class="nx">State</span> <span class="kt">uint8</span>  <span class="s">`form:&#34;state,default=1&#34; binding:&#34;oneof=0 1&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">TagListRequest</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Name</span>  <span class="kt">string</span> <span class="s">`form:&#34;name&#34; binding:&#34;max=100&#34;`</span>
+	<span class="nx">State</span> <span class="kt">uint8</span>  <span class="s">`form:&#34;state,default=1&#34; binding:&#34;oneof=0 1&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">CreateTagRequest</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Name</span>      <span class="kt">string</span> <span class="s">`form:&#34;name&#34; binding:&#34;required,min=3,max=100&#34;`</span>
+	<span class="nx">CreatedBy</span> <span class="kt">string</span> <span class="s">`form:&#34;created_by&#34; binding:&#34;required,min=3,max=100&#34;`</span>
+	<span class="nx">State</span>     <span class="kt">uint8</span>  <span class="s">`form:&#34;state,default=1&#34; binding:&#34;oneof=0 1&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">UpdateTagRequest</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">ID</span>         <span class="kt">uint32</span> <span class="s">`form:&#34;id&#34; binding:&#34;required,gte=1&#34;`</span>
+	<span class="nx">Name</span>       <span class="kt">string</span> <span class="s">`form:&#34;name&#34; binding:&#34;min=3,max=100&#34;`</span>
+	<span class="nx">State</span>      <span class="kt">uint8</span>  <span class="s">`form:&#34;state&#34; binding:&#34;oneof=0 1&#34;`</span>
+	<span class="nx">ModifiedBy</span> <span class="kt">string</span> <span class="s">`form:&#34;modified_by&#34; binding:&#34;required,min=3,max=100&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">DeleteTagRequest</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">ID</span> <span class="kt">uint32</span> <span class="s">`form:&#34;id&#34; binding:&#34;required,gte=1&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">svc</span> <span class="o">*</span><span class="nx">Service</span><span class="p">)</span> <span class="nf">CountTag</span><span class="p">(</span><span class="nx">param</span> <span class="o">*</span><span class="nx">CountTagRequest</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">svc</span><span class="p">.</span><span class="nx">dao</span><span class="p">.</span><span class="nf">CountTag</span><span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span> <span class="nx">param</span><span class="p">.</span><span class="nx">State</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">svc</span> <span class="o">*</span><span class="nx">Service</span><span class="p">)</span> <span class="nf">GetTagList</span><span class="p">(</span><span class="nx">param</span> <span class="o">*</span><span class="nx">TagListRequest</span><span class="p">,</span> <span class="nx">pager</span> <span class="o">*</span><span class="nx">app</span><span class="p">.</span><span class="nx">Pager</span><span class="p">)</span> <span class="p">([]</span><span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Tag</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">svc</span><span class="p">.</span><span class="nx">dao</span><span class="p">.</span><span class="nf">GetTagList</span><span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span> <span class="nx">param</span><span class="p">.</span><span class="nx">State</span><span class="p">,</span> <span class="nx">pager</span><span class="p">.</span><span class="nx">Page</span><span class="p">,</span> <span class="nx">pager</span><span class="p">.</span><span class="nx">PageSize</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">svc</span> <span class="o">*</span><span class="nx">Service</span><span class="p">)</span> <span class="nf">CreateTag</span><span class="p">(</span><span class="nx">param</span> <span class="o">*</span><span class="nx">CreateTagRequest</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">svc</span><span class="p">.</span><span class="nx">dao</span><span class="p">.</span><span class="nf">CreateTag</span><span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span> <span class="nx">param</span><span class="p">.</span><span class="nx">State</span><span class="p">,</span> <span class="nx">param</span><span class="p">.</span><span class="nx">CreatedBy</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">svc</span> <span class="o">*</span><span class="nx">Service</span><span class="p">)</span> <span class="nf">UpdateTag</span><span class="p">(</span><span class="nx">param</span> <span class="o">*</span><span class="nx">UpdateTagRequest</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">svc</span><span class="p">.</span><span class="nx">dao</span><span class="p">.</span><span class="nf">UpdateTag</span><span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span> <span class="nx">param</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span> <span class="nx">param</span><span class="p">.</span><span class="nx">State</span><span class="p">,</span> <span class="nx">param</span><span class="p">.</span><span class="nx">ModifiedBy</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">svc</span> <span class="o">*</span><span class="nx">Service</span><span class="p">)</span> <span class="nf">DeleteTag</span><span class="p">(</span><span class="nx">param</span> <span class="o">*</span><span class="nx">DeleteTagRequest</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">svc</span><span class="p">.</span><span class="nx">dao</span><span class="p">.</span><span class="nf">DeleteTag</span><span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">ID</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>we define Request struct as the reference for the interface entry. Other than that, we do some simple encapsulation in service</p>
+<h2 id="35-new-err-code">3.5 New err	 code</h2>
+<p>create <strong>module_code.go</strong> under <code>pkg/errcode</code> for tag module</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go">	<span class="nx">ErrorGetTagListFail</span>    <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">20010001</span><span class="p">,</span> <span class="s">&#34;获取标签列表失败&#34;</span><span class="p">)</span>
+	<span class="nx">ErrorCreateTagFail</span>     <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">20010002</span><span class="p">,</span> <span class="s">&#34;创建标签失败&#34;</span><span class="p">)</span>
+	<span class="nx">ErrorUpdateTagFail</span>     <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">20010003</span><span class="p">,</span> <span class="s">&#34;更新标签失败&#34;</span><span class="p">)</span>
+	<span class="nx">ErrorDeleteTagFail</span>     <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">20010004</span><span class="p">,</span> <span class="s">&#34;删除标签失败&#34;</span><span class="p">)</span>
+	<span class="nx">ErrorCountTagFail</span>      <span class="p">=</span> <span class="nf">NewError</span><span class="p">(</span><span class="mi">20010005</span><span class="p">,</span> <span class="s">&#34;统计标签失败&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="36-new-router-method">3.6 New router method</h2>
+<p>open <strong>tag.go</strong> under <code>internal/routers/api/v1</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="nx">Tag</span><span class="p">)</span> <span class="nf">List</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">param</span> <span class="o">:=</span> <span class="nx">service</span><span class="p">.</span><span class="nx">TagListRequest</span><span class="p">{}</span>
+	<span class="nx">response</span> <span class="o">:=</span> <span class="nx">app</span><span class="p">.</span><span class="nf">NewResponse</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+	<span class="nx">valid</span><span class="p">,</span> <span class="nx">errs</span> <span class="o">:=</span> <span class="nx">app</span><span class="p">.</span><span class="nf">BindAndValid</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">param</span><span class="p">)</span>
+	<span class="k">if</span> <span class="p">!</span><span class="nx">valid</span> <span class="p">{</span>
+		<span class="nx">global</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;app.BindAndValid errs: %v&#34;</span><span class="p">,</span> <span class="nx">errs</span><span class="p">)</span>
+		<span class="nx">response</span><span class="p">.</span><span class="nf">ToErrorResponse</span><span class="p">(</span><span class="nx">errcode</span><span class="p">.</span><span class="nx">InvalidParams</span><span class="p">.</span><span class="nf">WithDetails</span><span class="p">(</span><span class="nx">errs</span><span class="p">.</span><span class="nf">Errors</span><span class="p">()</span><span class="o">...</span><span class="p">))</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">svc</span> <span class="o">:=</span> <span class="nx">service</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nf">Context</span><span class="p">())</span>
+	<span class="nx">pager</span> <span class="o">:=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">Pager</span><span class="p">{</span><span class="nx">Page</span><span class="p">:</span> <span class="nx">app</span><span class="p">.</span><span class="nf">GetPage</span><span class="p">(</span><span class="nx">c</span><span class="p">),</span> <span class="nx">PageSize</span><span class="p">:</span> <span class="nx">app</span><span class="p">.</span><span class="nf">GetPageSize</span><span class="p">(</span><span class="nx">c</span><span class="p">)}</span>
+	<span class="nx">totalRows</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">svc</span><span class="p">.</span><span class="nf">CountTag</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">service</span><span class="p">.</span><span class="nx">CountTagRequest</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="nx">param</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span> <span class="nx">State</span><span class="p">:</span> <span class="nx">param</span><span class="p">.</span><span class="nx">State</span><span class="p">})</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">global</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;svc.CountTag err: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+		<span class="nx">response</span><span class="p">.</span><span class="nf">ToErrorResponse</span><span class="p">(</span><span class="nx">errcode</span><span class="p">.</span><span class="nx">ErrorCountTagFail</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">tags</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">svc</span><span class="p">.</span><span class="nf">GetTagList</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">param</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">pager</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">global</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;svc.GetTagList err: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+		<span class="nx">response</span><span class="p">.</span><span class="nf">ToErrorResponse</span><span class="p">(</span><span class="nx">errcode</span><span class="p">.</span><span class="nx">ErrorGetTagListFail</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">response</span><span class="p">.</span><span class="nf">ToResponseList</span><span class="p">(</span><span class="nx">tags</span><span class="p">,</span> <span class="nx">totalRows</span><span class="p">)</span>
+	<span class="k">return</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="nx">Tag</span><span class="p">)</span> <span class="nf">Create</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">param</span> <span class="o">:=</span> <span class="nx">service</span><span class="p">.</span><span class="nx">CreateTagRequest</span><span class="p">{}</span>
+	<span class="nx">response</span> <span class="o">:=</span> <span class="nx">app</span><span class="p">.</span><span class="nf">NewResponse</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+	<span class="nx">valid</span><span class="p">,</span> <span class="nx">errs</span> <span class="o">:=</span> <span class="nx">app</span><span class="p">.</span><span class="nf">BindAndValid</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">param</span><span class="p">)</span>
+	<span class="k">if</span> <span class="p">!</span><span class="nx">valid</span> <span class="p">{</span>
+		<span class="nx">global</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;app.BindAndValid errs: %v&#34;</span><span class="p">,</span> <span class="nx">errs</span><span class="p">)</span>
+		<span class="nx">response</span><span class="p">.</span><span class="nf">ToErrorResponse</span><span class="p">(</span><span class="nx">errcode</span><span class="p">.</span><span class="nx">InvalidParams</span><span class="p">.</span><span class="nf">WithDetails</span><span class="p">(</span><span class="nx">errs</span><span class="p">.</span><span class="nf">Errors</span><span class="p">()</span><span class="o">...</span><span class="p">))</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">svc</span> <span class="o">:=</span> <span class="nx">service</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nf">Context</span><span class="p">())</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">svc</span><span class="p">.</span><span class="nf">CreateTag</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">param</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">global</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;svc.CreateTag err: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+		<span class="nx">response</span><span class="p">.</span><span class="nf">ToErrorResponse</span><span class="p">(</span><span class="nx">errcode</span><span class="p">.</span><span class="nx">ErrorCreateTagFail</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">response</span><span class="p">.</span><span class="nf">ToResponse</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{})</span>
+	<span class="k">return</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="nx">Tag</span><span class="p">)</span> <span class="nf">Update</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">param</span> <span class="o">:=</span> <span class="nx">service</span><span class="p">.</span><span class="nx">UpdateTagRequest</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">convert</span><span class="p">.</span><span class="nf">StrTo</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">)).</span><span class="nf">MustUInt32</span><span class="p">()}</span>
+	<span class="nx">response</span> <span class="o">:=</span> <span class="nx">app</span><span class="p">.</span><span class="nf">NewResponse</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+	<span class="nx">valid</span><span class="p">,</span> <span class="nx">errs</span> <span class="o">:=</span> <span class="nx">app</span><span class="p">.</span><span class="nf">BindAndValid</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">param</span><span class="p">)</span>
+	<span class="k">if</span> <span class="p">!</span><span class="nx">valid</span> <span class="p">{</span>
+		<span class="nx">global</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;app.BindAndValid errs: %v&#34;</span><span class="p">,</span> <span class="nx">errs</span><span class="p">)</span>
+		<span class="nx">response</span><span class="p">.</span><span class="nf">ToErrorResponse</span><span class="p">(</span><span class="nx">errcode</span><span class="p">.</span><span class="nx">InvalidParams</span><span class="p">.</span><span class="nf">WithDetails</span><span class="p">(</span><span class="nx">errs</span><span class="p">.</span><span class="nf">Errors</span><span class="p">()</span><span class="o">...</span><span class="p">))</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">svc</span> <span class="o">:=</span> <span class="nx">service</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nf">Context</span><span class="p">())</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">svc</span><span class="p">.</span><span class="nf">UpdateTag</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">param</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">global</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;svc.UpdateTag err: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+		<span class="nx">response</span><span class="p">.</span><span class="nf">ToErrorResponse</span><span class="p">(</span><span class="nx">errcode</span><span class="p">.</span><span class="nx">ErrorUpdateTagFail</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">response</span><span class="p">.</span><span class="nf">ToResponse</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{})</span>
+	<span class="k">return</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="nx">Tag</span><span class="p">)</span> <span class="nf">Delete</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">param</span> <span class="o">:=</span> <span class="nx">service</span><span class="p">.</span><span class="nx">DeleteTagRequest</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">convert</span><span class="p">.</span><span class="nf">StrTo</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">)).</span><span class="nf">MustUInt32</span><span class="p">()}</span>
+	<span class="nx">response</span> <span class="o">:=</span> <span class="nx">app</span><span class="p">.</span><span class="nf">NewResponse</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+	<span class="nx">valid</span><span class="p">,</span> <span class="nx">errs</span> <span class="o">:=</span> <span class="nx">app</span><span class="p">.</span><span class="nf">BindAndValid</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">param</span><span class="p">)</span>
+	<span class="k">if</span> <span class="p">!</span><span class="nx">valid</span> <span class="p">{</span>
+		<span class="nx">global</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;app.BindAndValid errs: %v&#34;</span><span class="p">,</span> <span class="nx">errs</span><span class="p">)</span>
+		<span class="nx">response</span><span class="p">.</span><span class="nf">ToErrorResponse</span><span class="p">(</span><span class="nx">errcode</span><span class="p">.</span><span class="nx">InvalidParams</span><span class="p">.</span><span class="nf">WithDetails</span><span class="p">(</span><span class="nx">errs</span><span class="p">.</span><span class="nf">Errors</span><span class="p">()</span><span class="o">...</span><span class="p">))</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">svc</span> <span class="o">:=</span> <span class="nx">service</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nf">Context</span><span class="p">())</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">svc</span><span class="p">.</span><span class="nf">DeleteTag</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">param</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">global</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;svc.DeleteTag err: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+		<span class="nx">response</span><span class="p">.</span><span class="nf">ToErrorResponse</span><span class="p">(</span><span class="nx">errcode</span><span class="p">.</span><span class="nx">ErrorDeleteTagFail</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">response</span><span class="p">.</span><span class="nf">ToResponse</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{})</span>
+	<span class="k">return</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="37-problem">3.7 Problem</h2>
+<p>After we test the interface we need to make sure data in database get modified properly. We find that when we call updateTag interface, we want to change <strong>status</strong> from tag which id is 1 into 0, but status in database remains to be 1, additionally SQL query don&rsquo;t contain conditioning for status field. terminal output SQL is as follow:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">UPDATE</span><span class="w"> </span><span class="o">`</span><span class="n">blog_tag</span><span class="o">`</span><span class="w"> </span><span class="kt">SET</span><span class="w"> </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">modified_by</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;eddycjy&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">modified_on</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xxxxx</span><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="o">`</span><span class="n">blog_tag</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>this is because GORM won&rsquo;t do changes to field which value is 0, as it&rsquo;s hard to tell 0 is the value we want to pass or 0 stand for not changing.</p>
+<p>To solve this problem, we need to modify Update method of <strong>tag.go</strong> under <code>internal/model</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="nx">Tag</span><span class="p">)</span> <span class="nf">Update</span><span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span> <span class="nx">values</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Model</span><span class="p">(</span><span class="nx">t</span><span class="p">).</span><span class="nf">Updates</span><span class="p">(</span><span class="nx">values</span><span class="p">).</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id = ? AND is_del = ?&#34;</span><span class="p">,</span><span class="nx">t</span><span class="p">.</span><span class="nx">ID</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">err</span>
+<span class="p">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>then modify UpdateTag method in *<em>tag.go</em> under <code>internal/dao</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Dao</span><span class="p">)</span> <span class="nf">UpdateTag</span><span class="p">(</span><span class="nx">id</span> <span class="kt">uint32</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">state</span> <span class="kt">uint8</span><span class="p">,</span> <span class="nx">modifiedBy</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">tag</span> <span class="o">:=</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Tag</span> <span class="p">{</span>
+		<span class="nx">Model</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">Model</span> <span class="p">{</span>
+			<span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span>
+		<span class="p">},</span>
+	<span class="p">}</span>
+	<span class="nx">values</span> <span class="o">:=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}</span> <span class="p">{</span>
+		<span class="s">&#34;state&#34;</span><span class="p">:</span> <span class="nx">state</span><span class="p">,</span>
+		<span class="s">&#34;modified_by&#34;</span><span class="p">:</span> <span class="nx">modifiedBy</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="nx">name</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+		<span class="nx">values</span><span class="p">[</span><span class="s">&#34;name&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="nx">name</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">tag</span><span class="p">.</span><span class="nf">Update</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">engine</span><span class="p">,</span> <span class="nx">values</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="38-summary">3.8 Summary</h2>
+<p>Go interface development is kinda similar to JAVA, SQL operation is done in model layer, then being encapsulated and initialize some field value like pageOffset by DAO layer, Service layer majorly encapsulate business logic, router method is all about parameter verification and binding, processing operation, serializing result set.</p></div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-02-09&nbsp;<a class="git-hash" href="https://github.com/York-Shawn/blog/commit/369a97d1b066d85e96fb3d0e9a0bfb4b3bfa9547" target="_blank" title="commit by Shawn(yorkshawn007@gmail.com) 369a97d1b066d85e96fb3d0e9a0bfb4b3bfa9547: change content" rel="noopener noreferrer">
+                                    <i class="fas fa-hashtag fa-fw"></i>369a97d</a></span>
+            </div>
+            <div class="post-info-license"><span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/gin-tutorial-3/index.md" target="_blank" rel="noopener noreferrer">Read Markdown</a>
+                        </span>|&nbsp;<span><a class="link-to-edit" href=https://github.com/York-Shawn/blog/tree/main/content/posts/Gin-Tutorial-3/index.md target="_blank" rel="noopener noreferrer">Edit this page</a>
+                            </span></div>
+            <div class="post-info-share">
+                <span><a href="#" onclick="return false;" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/gin-tutorial-3/" data-title="Gin-Tutorial-3" data-via="BigSnakeShawn" data-hashtags="Go,Backend"><i class="fab fa-twitter fa-fw"></i></a><a href="#" onclick="return false;" title="Share on Linkedin" data-sharer="linkedin" data-url="http://example.org/posts/gin-tutorial-3/"><i class="fab fa-linkedin fa-fw"></i></a><a href="#" onclick="return false;" title="Share on Reddit" data-sharer="reddit" data-url="http://example.org/posts/gin-tutorial-3/"><i class="fab fa-reddit fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/backend/">Backend</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/gin-tutorial-1/" class="prev" rel="prev" title="Gin-Tutorial-1"><i class="fas fa-angle-left fa-fw"></i>Gin-Tutorial-1</a>
+            <a href="/posts/gin-tutorial-2/" class="next" rel="next" title="Gin-Tutorial-2">Gin-Tutorial-2<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.90.0">Hugo</a> | Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Aya</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/fuse/fuse.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"data":{"desktop-header-typeit":"Aya","mobile-header-typeit":"Aya"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":true,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"No results found","snippetLength":30,"threshold":0.1,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/lightgallery/lightgallery.min.css">
+    <noscript><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"></noscript></div>
+</body>
+
+</html>

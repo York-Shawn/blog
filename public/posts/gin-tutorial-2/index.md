@@ -131,7 +131,7 @@ in the configuration, we set the default settings for:
 * Server: server conf, gin's RunMode, default HTTP listening port, maximum read and write time
 * APP: Application conf, default page size, maximum page size and default log save path
 * Database: Database conf, required parameters of connecting to db instance
-## 3. component
+### 2.2 write component
 after configuration file, encapsulate the method of reading conf. create setting.go in `pkg/setting`
 #### setting.go
 ```GO
@@ -194,7 +194,7 @@ func (s *Setting) ReadSection(k string, v interface{}) error {
 	return nil
 }
 ```
-### 3.1 package gloabl variable
+### 2.3 package gloabl variable
 To connect the conf and app, we should create global variable for us to use them.  
 setting.go in `global/`
 #### setting.go
@@ -205,7 +205,7 @@ var (
 	DatabaseSetting *setting.DatabaseSettingS
 )
 ```
-### 3.2 initialize reading conf
+### 2.4 initialize reading conf
 back to main.go
 #### main.go
 ```GO
@@ -243,7 +243,7 @@ func setupSetting() error {
 ```
 `init` is used for initialize process in app, and is run automatically.  
 Order is : init global variable => init method => main method 
-### 3.3 modify server conf
+### 2.5 modify server conf
 all we need to do is to set the conf and RunMode of gin in `main.go`
 ```GO
 func main() {
@@ -259,12 +259,12 @@ func main() {
 	s.ListenAndServe()
 }
 ```
-## 4. DataBase Connection
+## 3. DataBase Connection
 use third party lib **gorm**
 
 	go get -u github.com/jinzhu/gorm
 
-### 4.1 component
+### 3.1 component
 add **NewDBEngine** method to *model.go* under `internal/model/`
 #### model.go
 ```GO
@@ -294,7 +294,7 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 }
 ```
 **NewDBEngine** create a DB instance, and add the import of `gorm` and initialize MySQL driver lib `github.com/jinzhu/gorm/dialects/mysql`
-### 4.2 package global variable
+### 3.2 package global variable
 create db.go in `global`
 #### db.go  
 ```GO
@@ -302,7 +302,7 @@ var (
     DBEngine *gorm.DB
 )
 ```
-### 4.3 initialization
+### 3.3 initialization
 add method **setupDBEngine** to main.go
 #### main.go
 ```GO
@@ -328,11 +328,11 @@ func setupDBEngine() error {
 	return nil
 }
 ```
-## 5. Log
+## 4. Log
 
 	go get -u gopkg.in/natefinch/lumberjack.v2
 
-### 5.1 log classification
+### 4.1 log classification
 create logger.go in `pkg/logger/`
 #### logger.go
 ```GO
@@ -368,7 +368,7 @@ func (l Level) String() string {
 }
 ```
 We predefine the specific types of Level and Fields in app log, and categorize into Debug, Info, Warn, Error, Fatal, Panic.
-### 5.2 log standardization
+### 4.2 log standardization
 After categorize method, we shall work on methods for initialization of instance and standardized parameter binding
 #### logger.go
 ```GO
@@ -441,7 +441,7 @@ WithContext: Set log context attribute
 WithCaller: Set one caller's information
 WithCallerFrames: Set all caller's information
 
-### 5.3 log formatting & output
+### 4.3 log formatting & output
 #### logger.go
 ```GO
 func (l *Logger) JSONFormat(level Level, message string) map[string]interface{} {
@@ -480,7 +480,7 @@ func (l *Logger) Output(level Level, message string) {
 	}
 }
 ```
-### 5.4 log classified output
+### 4.4 log classified output
 #### logger.go
 ```GO
 func (l *Logger) Info(v ...interface{}) {
@@ -502,7 +502,7 @@ func (l *Logger) Fatalf(format string, v ...interface{}) {
 ...
 ```
 code above just shows **info** and **Fatal** output, other level code is no difference but the name and Withlevel.
-### 5.5 package global variable
+### 4.5 package global variable
 after we finish the logger, we need to define a **Logger** object for our app to use. So, we open the `global/setting.go` file, add following contents.
 #### setting.go
 ```GO
@@ -511,7 +511,7 @@ var (
 	Logger	*logger.Logger
 )
 ```
-### 5.6 initialization
+### 4.6 initialization
 next, we should modify the `main.go` in the root directory, add on initialization for the Logger object we just defined
 ```GO
 func init() {
@@ -541,3 +541,119 @@ func setupLogger() error {
 ```
 we add logger component through this file, and initialize the global variable `Logger` inside method `setupLogger`. Being aware that we use `lumberjack` as logger's **io.writer**.
 
+## 5. Response Handling
+In application, port from server bond to client, then how do server know know the result of interface call. Generally speaking, it depends on the HTTP status code and response the interface returned, and the judgement is based on the response results defined in advance according to the specification.
+
+Therefore in this subsection we'll write the response handling method returned by the Unified Processing Interface, which also correspond to error code standardization.
+
+### 5.1 type converting
+create *convert.go* under `pkg/convert`
+#### convert.go
+```go 
+type StrTo string
+
+func (s StrTo) String() string {
+	return string(s)
+}
+
+func (s StrTo) Int() (int, error) {
+	v, err := strconv.Atoi(s.String())
+	return v, err
+}
+
+func (s StrTo) MustInt() int {
+	v, _ := s.Int()
+	return v
+}
+
+func (s StrTo) UInt32() (uint32, error) {
+	v, err := strconv.Atoi(s.String())
+	return uint32(v), err
+}
+
+func (s StrTo) MustUInt32() uint32 {
+	v, _ := s.UInt32()
+	return v
+}
+```
+### 5.2 paging handling
+create *pagination.go* under `pkg/app`
+#### pagination.go
+```go
+func GetPage(c *gin.Context) int {
+	page := convert.StrTo(c.Query("page")).MustInt()
+	if page <= 0 {
+		return 1
+	}
+
+	return page
+}
+
+func GetPageSize(c *gin.Context) int {
+	pageSize := convert.StrTo(c.Query("page_size")).MustInt()
+	if pageSize <= 0 {
+		return global.AppSetting.DefaultPageSize
+	}
+	if pageSize > global.AppSetting.MaxPageSize {
+		return global.AppSetting.MaxPageSize
+	}
+
+	return pageSize
+}
+
+func GetPageOffset(page, pageSize int) int {
+	result := 0
+	if page > 0 {
+		result = (page - 1) * pageSize
+	}
+
+	return result
+}
+```
+
+### 5.3 response handling
+create *app.go* under `pkg/app`
+#### app.go
+```go
+type Response struct {
+	Ctx *gin.Context
+}
+
+type Pager struct {
+	Page int `json:"page"`
+	PageSize int `json:"page_size"`
+	TotalRows int `json:"total_rows"`
+}
+
+func NewResponse(ctx *gin.Context) *Response {
+	return &Response{Ctx: ctx}
+}
+
+func (r *Response) ToResponse(data interface{}) {
+	if data == nil {
+		data = gin.H{}
+	}
+	r.Ctx.JSON(http.StatusOK, data)
+}
+
+func (r *Response) ToResponseList(list interface{}, totalRows int) {
+	r.Ctx.JSON(http.StatusOK, gin.H{
+		"list": list,
+		"pager": Pager{
+			Page:      GetPage(r.Ctx),
+			PageSize:  GetPageSize(r.Ctx),
+			TotalRows: totalRows,
+		},
+	})
+}
+
+func (r *Response) ToErrorResponse(err *errcode.Error) {
+	response := gin.H{"code": err.Code(), "msg": err.Msg()}
+	details := err.Details()
+	if len(details) > 0 {
+		response["details"] = details
+	}
+
+	r.Ctx.JSON(err.StatusCode(), response)
+}
+```

@@ -29,7 +29,7 @@ license: '<a rel="license external nofollow noopener noreffer" href="https://cre
 
 Description: error `kex_exchange_identification: Connection closed by remote host` poped up when pushing to github. Got the same error message by running ` ssh -T git@github.com` 
 
-Solution: Use another VPN
+Solution: Use another VPN.
 
 ## 2. fast-forward when pushing to remote
 
